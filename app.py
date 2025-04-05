@@ -504,6 +504,10 @@ def main():
             test_data["ammo"]["coal_in"] = gen_coal
             test_data["ammo"]["primer"]["brand"] = gen_primer_brand
             test_data["ammo"]["primer"]["model"] = gen_primer_model
+            
+            # Save the data immediately to ensure it's not lost
+            utils.save_test_data(new_test_id, test_data)
+            st.success(f"Test data for '{new_test_id}' saved successfully!")
     
     # Display current test ID
     if test_id:
