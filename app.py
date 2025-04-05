@@ -518,6 +518,12 @@ def main():
         st.subheader("Generated Test ID")
         st.code(st.session_state.generated_test_id)
         test_data["test_id"] = st.session_state.generated_test_id
+        
+        # Load the saved data to ensure we don't lose it when saving from the main form
+        saved_data = utils.get_test_data(st.session_state.generated_test_id)
+        if saved_data:
+            # Update test_data with the saved data
+            test_data.update(saved_data)
     
     # Create tabs for different sections
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
