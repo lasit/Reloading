@@ -3,6 +3,44 @@ import yaml
 from typing import Dict, List, Any, Optional
 
 
+def load_component_lists() -> Dict[str, List[str]]:
+    """
+    Load component lists from the Component_List.yaml file.
+    
+    Returns:
+        Dictionary containing lists of components for dropdown menus
+    """
+    component_list_path = "Component_List.yaml"
+    if not os.path.exists(component_list_path):
+        # Create default component lists if file doesn't exist
+        default_lists = {
+            "calibre": ["223", "308", "6.5CM"],
+            "rifle": ["Tikka T3X"],
+            "case_brand": ["Hornady", "Sako", "Lapua"],
+            "powder_brand": ["ADI"],
+            "powder_model": ["2208", "2206H"],
+            "bullet_brand": ["Hornady", "Berger"],
+            "bullet_model": ["ELD-M"],
+            "primer_brand": ["CCI", "RWS"],
+            "primer_model": ["BR-4", "4033"]
+        }
+        save_component_lists(default_lists)
+        return default_lists
+    
+    return load_yaml(component_list_path)
+
+
+def save_component_lists(component_lists: Dict[str, List[str]]) -> None:
+    """
+    Save component lists to the Component_List.yaml file.
+    
+    Args:
+        component_lists: Dictionary containing lists of components for dropdown menus
+    """
+    component_list_path = "Component_List.yaml"
+    save_yaml(component_list_path, component_lists)
+
+
 def load_yaml(file_path: str) -> Dict[str, Any]:
     """
     Load a YAML file and return its contents as a dictionary.

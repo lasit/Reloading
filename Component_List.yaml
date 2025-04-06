@@ -1,0 +1,35 @@
+# Component lists for dropdown menus
+calibre:
+  - "223"
+  - "308"
+  - "6.5CM"
+
+rifle:
+  - "Tikka T3X"
+
+case_brand:
+  - "Hornady"
+  - "Sako"
+  - "Lapua"
+
+powder_brand:
+  - "ADI"
+
+powder_model:
+  - "2208"
+  - "2206H"
+
+bullet_brand:
+  - "Hornady"
+  - "Berger"
+
+bullet_model:
+  - "ELD-M"
+
+primer_brand:
+  - "CCI"
+  - "RWS"
+
+primer_model:
+  - "BR-4"
+  - "4033"

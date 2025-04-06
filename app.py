@@ -4,6 +4,7 @@ import os
 import re
 from typing import Dict, Any, Optional, Tuple
 import utils
+from utils import load_component_lists
 
 def create_empty_test_data() -> Dict[str, Any]:
     """
@@ -288,6 +289,9 @@ def main():
     st.title("Precision Rifle Load Development")
     st.markdown("---")
     
+    # Load component lists for dropdown menus
+    component_lists = load_component_lists()
+    
     # Sidebar for test selection
     with st.sidebar:
         st.header("Test Selection")
@@ -359,37 +363,102 @@ def main():
         
         col1, col2 = st.columns(2)
         with col1:
-            gen_calibre = st.text_input(
+            # Use selectbox with option to add custom value
+            calibre_options = component_lists.get("calibre", [])
+            if test_data["platform"]["calibre"] and test_data["platform"]["calibre"] not in calibre_options:
+                calibre_options = [test_data["platform"]["calibre"]] + calibre_options
+            
+            gen_calibre = st.selectbox(
                 "Calibre *", 
-                value=test_data["platform"]["calibre"],
-                placeholder="e.g. 223_Rem",
+                options=calibre_options + ["Custom..."],
+                index=calibre_options.index(test_data["platform"]["calibre"]) if test_data["platform"]["calibre"] in calibre_options else len(calibre_options),
                 key="gen_calibre"
             )
-            gen_rifle = st.text_input(
+            if gen_calibre == "Custom...":
+                gen_calibre = st.text_input(
+                    "Custom Calibre *", 
+                    value="",
+                    placeholder="e.g. 223_Rem",
+                    key="gen_calibre_custom"
+                )
+            
+            # Rifle selectbox
+            rifle_options = component_lists.get("rifle", [])
+            if test_data["platform"]["rifle"] and test_data["platform"]["rifle"] not in rifle_options:
+                rifle_options = [test_data["platform"]["rifle"]] + rifle_options
+                
+            gen_rifle = st.selectbox(
                 "Rifle *", 
-                value=test_data["platform"]["rifle"],
-                placeholder="e.g. Tikka_T3x",
+                options=rifle_options + ["Custom..."],
+                index=rifle_options.index(test_data["platform"]["rifle"]) if test_data["platform"]["rifle"] in rifle_options else len(rifle_options),
                 key="gen_rifle"
             )
-            gen_case_brand = st.text_input(
+            if gen_rifle == "Custom...":
+                gen_rifle = st.text_input(
+                    "Custom Rifle *", 
+                    value="",
+                    placeholder="e.g. Tikka_T3x",
+                    key="gen_rifle_custom"
+                )
+            
+            # Case Brand selectbox
+            case_brand_options = component_lists.get("case_brand", [])
+            if test_data["ammo"]["case"]["brand"] and test_data["ammo"]["case"]["brand"] not in case_brand_options:
+                case_brand_options = [test_data["ammo"]["case"]["brand"]] + case_brand_options
+                
+            gen_case_brand = st.selectbox(
                 "Case Brand *", 
-                value=test_data["ammo"]["case"]["brand"],
-                placeholder="e.g. Lapua",
+                options=case_brand_options + ["Custom..."],
+                index=case_brand_options.index(test_data["ammo"]["case"]["brand"]) if test_data["ammo"]["case"]["brand"] in case_brand_options else len(case_brand_options),
                 key="gen_case_brand"
             )
+            if gen_case_brand == "Custom...":
+                gen_case_brand = st.text_input(
+                    "Custom Case Brand *", 
+                    value="",
+                    placeholder="e.g. Lapua",
+                    key="gen_case_brand_custom"
+                )
+        
         with col2:
-            gen_bullet_brand = st.text_input(
+            # Bullet Brand selectbox
+            bullet_brand_options = component_lists.get("bullet_brand", [])
+            if test_data["ammo"]["bullet"]["brand"] and test_data["ammo"]["bullet"]["brand"] not in bullet_brand_options:
+                bullet_brand_options = [test_data["ammo"]["bullet"]["brand"]] + bullet_brand_options
+                
+            gen_bullet_brand = st.selectbox(
                 "Bullet Brand *", 
-                value=test_data["ammo"]["bullet"]["brand"],
-                placeholder="e.g. Hornady",
+                options=bullet_brand_options + ["Custom..."],
+                index=bullet_brand_options.index(test_data["ammo"]["bullet"]["brand"]) if test_data["ammo"]["bullet"]["brand"] in bullet_brand_options else len(bullet_brand_options),
                 key="gen_bullet_brand"
             )
-            gen_bullet_model = st.text_input(
+            if gen_bullet_brand == "Custom...":
+                gen_bullet_brand = st.text_input(
+                    "Custom Bullet Brand *", 
+                    value="",
+                    placeholder="e.g. Hornady",
+                    key="gen_bullet_brand_custom"
+                )
+            
+            # Bullet Model selectbox
+            bullet_model_options = component_lists.get("bullet_model", [])
+            if test_data["ammo"]["bullet"]["model"] and test_data["ammo"]["bullet"]["model"] not in bullet_model_options:
+                bullet_model_options = [test_data["ammo"]["bullet"]["model"]] + bullet_model_options
+                
+            gen_bullet_model = st.selectbox(
                 "Bullet Model *", 
-                value=test_data["ammo"]["bullet"]["model"],
-                placeholder="e.g. ELD-M",
+                options=bullet_model_options + ["Custom..."],
+                index=bullet_model_options.index(test_data["ammo"]["bullet"]["model"]) if test_data["ammo"]["bullet"]["model"] in bullet_model_options else len(bullet_model_options),
                 key="gen_bullet_model"
             )
+            if gen_bullet_model == "Custom...":
+                gen_bullet_model = st.text_input(
+                    "Custom Bullet Model *", 
+                    value="",
+                    placeholder="e.g. ELD-M",
+                    key="gen_bullet_model_custom"
+                )
+            
             gen_bullet_weight = st.number_input(
                 "Bullet Weight (gr) *", 
                 min_value=0.0, 
@@ -400,18 +469,44 @@ def main():
         
         col1, col2 = st.columns(2)
         with col1:
-            gen_powder_brand = st.text_input(
+            # Powder Brand selectbox
+            powder_brand_options = component_lists.get("powder_brand", [])
+            if test_data["ammo"]["powder"]["brand"] and test_data["ammo"]["powder"]["brand"] not in powder_brand_options:
+                powder_brand_options = [test_data["ammo"]["powder"]["brand"]] + powder_brand_options
+                
+            gen_powder_brand = st.selectbox(
                 "Powder Brand *", 
-                value=test_data["ammo"]["powder"]["brand"],
-                placeholder="e.g. ADI",
+                options=powder_brand_options + ["Custom..."],
+                index=powder_brand_options.index(test_data["ammo"]["powder"]["brand"]) if test_data["ammo"]["powder"]["brand"] in powder_brand_options else len(powder_brand_options),
                 key="gen_powder_brand"
             )
-            gen_powder_model = st.text_input(
+            if gen_powder_brand == "Custom...":
+                gen_powder_brand = st.text_input(
+                    "Custom Powder Brand *", 
+                    value="",
+                    placeholder="e.g. ADI",
+                    key="gen_powder_brand_custom"
+                )
+            
+            # Powder Model selectbox
+            powder_model_options = component_lists.get("powder_model", [])
+            if test_data["ammo"]["powder"]["model"] and test_data["ammo"]["powder"]["model"] not in powder_model_options:
+                powder_model_options = [test_data["ammo"]["powder"]["model"]] + powder_model_options
+                
+            gen_powder_model = st.selectbox(
                 "Powder Model *", 
-                value=test_data["ammo"]["powder"]["model"],
-                placeholder="e.g. 2208",
+                options=powder_model_options + ["Custom..."],
+                index=powder_model_options.index(test_data["ammo"]["powder"]["model"]) if test_data["ammo"]["powder"]["model"] in powder_model_options else len(powder_model_options),
                 key="gen_powder_model"
             )
+            if gen_powder_model == "Custom...":
+                gen_powder_model = st.text_input(
+                    "Custom Powder Model *", 
+                    value="",
+                    placeholder="e.g. 2208",
+                    key="gen_powder_model_custom"
+                )
+            
             gen_powder_charge = st.number_input(
                 "Powder Charge (gr) *", 
                 min_value=0.0, 
@@ -419,6 +514,7 @@ def main():
                 step=0.1,
                 key="gen_powder_charge"
             )
+        
         with col2:
             gen_coal = st.number_input(
                 "COAL (inches) *", 
@@ -427,18 +523,44 @@ def main():
                 step=0.001,
                 key="gen_coal"
             )
-            gen_primer_brand = st.text_input(
+            
+            # Primer Brand selectbox
+            primer_brand_options = component_lists.get("primer_brand", [])
+            if test_data["ammo"]["primer"]["brand"] and test_data["ammo"]["primer"]["brand"] not in primer_brand_options:
+                primer_brand_options = [test_data["ammo"]["primer"]["brand"]] + primer_brand_options
+                
+            gen_primer_brand = st.selectbox(
                 "Primer Brand *", 
-                value=test_data["ammo"]["primer"]["brand"],
-                placeholder="e.g. CCI",
+                options=primer_brand_options + ["Custom..."],
+                index=primer_brand_options.index(test_data["ammo"]["primer"]["brand"]) if test_data["ammo"]["primer"]["brand"] in primer_brand_options else len(primer_brand_options),
                 key="gen_primer_brand"
             )
-            gen_primer_model = st.text_input(
+            if gen_primer_brand == "Custom...":
+                gen_primer_brand = st.text_input(
+                    "Custom Primer Brand *", 
+                    value="",
+                    placeholder="e.g. CCI",
+                    key="gen_primer_brand_custom"
+                )
+            
+            # Primer Model selectbox
+            primer_model_options = component_lists.get("primer_model", [])
+            if test_data["ammo"]["primer"]["model"] and test_data["ammo"]["primer"]["model"] not in primer_model_options:
+                primer_model_options = [test_data["ammo"]["primer"]["model"]] + primer_model_options
+                
+            gen_primer_model = st.selectbox(
                 "Primer Model *", 
-                value=test_data["ammo"]["primer"]["model"],
-                placeholder="e.g. BR4",
+                options=primer_model_options + ["Custom..."],
+                index=primer_model_options.index(test_data["ammo"]["primer"]["model"]) if test_data["ammo"]["primer"]["model"] in primer_model_options else len(primer_model_options),
                 key="gen_primer_model"
             )
+            if gen_primer_model == "Custom...":
+                gen_primer_model = st.text_input(
+                    "Custom Primer Model *", 
+                    value="",
+                    placeholder="e.g. BR4",
+                    key="gen_primer_model_custom"
+                )
         
         # Check if all required fields are filled
         all_fields_filled = (
@@ -562,16 +684,47 @@ def main():
             
             col1, col2 = st.columns(2)
             with col1:
-                test_data["platform"]["calibre"] = st.text_input(
+                # Use selectbox with option to add custom value for Calibre
+                calibre_options = component_lists.get("calibre", [])
+                if test_data["platform"]["calibre"] and test_data["platform"]["calibre"] not in calibre_options:
+                    calibre_options = [test_data["platform"]["calibre"]] + calibre_options
+                
+                selected_calibre = st.selectbox(
                     "Calibre", 
-                    value=test_data["platform"]["calibre"],
-                    placeholder="e.g. 223_Rem"
+                    options=calibre_options + ["Custom..."],
+                    index=calibre_options.index(test_data["platform"]["calibre"]) if test_data["platform"]["calibre"] in calibre_options else len(calibre_options),
+                    key="platform_calibre"
                 )
-                test_data["platform"]["rifle"] = st.text_input(
+                if selected_calibre == "Custom...":
+                    test_data["platform"]["calibre"] = st.text_input(
+                        "Custom Calibre", 
+                        value="",
+                        placeholder="e.g. 223_Rem",
+                        key="platform_calibre_custom"
+                    )
+                else:
+                    test_data["platform"]["calibre"] = selected_calibre
+                
+                # Use selectbox with option to add custom value for Rifle
+                rifle_options = component_lists.get("rifle", [])
+                if test_data["platform"]["rifle"] and test_data["platform"]["rifle"] not in rifle_options:
+                    rifle_options = [test_data["platform"]["rifle"]] + rifle_options
+                
+                selected_rifle = st.selectbox(
                     "Rifle", 
-                    value=test_data["platform"]["rifle"],
-                    placeholder="e.g. Tikka_T3x"
+                    options=rifle_options + ["Custom..."],
+                    index=rifle_options.index(test_data["platform"]["rifle"]) if test_data["platform"]["rifle"] in rifle_options else len(rifle_options),
+                    key="platform_rifle"
                 )
+                if selected_rifle == "Custom...":
+                    test_data["platform"]["rifle"] = st.text_input(
+                        "Custom Rifle", 
+                        value="",
+                        placeholder="e.g. Tikka_T3x",
+                        key="platform_rifle_custom"
+                    )
+                else:
+                    test_data["platform"]["rifle"] = selected_rifle
             with col2:
                 test_data["platform"]["barrel_length_in"] = st.number_input(
                     "Barrel Length (inches)", 
@@ -593,12 +746,26 @@ def main():
             st.subheader("Case")
             col1, col2 = st.columns(2)
             with col1:
-                test_data["ammo"]["case"]["brand"] = st.text_input(
+                # Use selectbox with option to add custom value for Case Brand
+                case_brand_options = component_lists.get("case_brand", [])
+                if test_data["ammo"]["case"]["brand"] and test_data["ammo"]["case"]["brand"] not in case_brand_options:
+                    case_brand_options = [test_data["ammo"]["case"]["brand"]] + case_brand_options
+                
+                selected_case_brand = st.selectbox(
                     "Brand", 
-                    value=test_data["ammo"]["case"]["brand"],
-                    key="case_brand", 
-                    placeholder="e.g. Sako"
+                    options=case_brand_options + ["Custom..."],
+                    index=case_brand_options.index(test_data["ammo"]["case"]["brand"]) if test_data["ammo"]["case"]["brand"] in case_brand_options else len(case_brand_options),
+                    key="case_brand_select"
                 )
+                if selected_case_brand == "Custom...":
+                    test_data["ammo"]["case"]["brand"] = st.text_input(
+                        "Custom Case Brand", 
+                        value="",
+                        placeholder="e.g. Sako",
+                        key="case_brand_custom"
+                    )
+                else:
+                    test_data["ammo"]["case"]["brand"] = selected_case_brand
             with col2:
                 test_data["ammo"]["case"]["lot"] = st.text_input(
                     "Lot", 
@@ -611,18 +778,47 @@ def main():
             st.subheader("Bullet")
             col1, col2 = st.columns(2)
             with col1:
-                test_data["ammo"]["bullet"]["brand"] = st.text_input(
+                # Use selectbox with option to add custom value for Bullet Brand
+                bullet_brand_options = component_lists.get("bullet_brand", [])
+                if test_data["ammo"]["bullet"]["brand"] and test_data["ammo"]["bullet"]["brand"] not in bullet_brand_options:
+                    bullet_brand_options = [test_data["ammo"]["bullet"]["brand"]] + bullet_brand_options
+                
+                selected_bullet_brand = st.selectbox(
                     "Brand", 
-                    value=test_data["ammo"]["bullet"]["brand"],
-                    key="bullet_brand", 
-                    placeholder="e.g. Hornady"
+                    options=bullet_brand_options + ["Custom..."],
+                    index=bullet_brand_options.index(test_data["ammo"]["bullet"]["brand"]) if test_data["ammo"]["bullet"]["brand"] in bullet_brand_options else len(bullet_brand_options),
+                    key="bullet_brand_select"
                 )
-                test_data["ammo"]["bullet"]["model"] = st.text_input(
+                if selected_bullet_brand == "Custom...":
+                    test_data["ammo"]["bullet"]["brand"] = st.text_input(
+                        "Custom Bullet Brand", 
+                        value="",
+                        placeholder="e.g. Hornady",
+                        key="bullet_brand_custom"
+                    )
+                else:
+                    test_data["ammo"]["bullet"]["brand"] = selected_bullet_brand
+                
+                # Use selectbox with option to add custom value for Bullet Model
+                bullet_model_options = component_lists.get("bullet_model", [])
+                if test_data["ammo"]["bullet"]["model"] and test_data["ammo"]["bullet"]["model"] not in bullet_model_options:
+                    bullet_model_options = [test_data["ammo"]["bullet"]["model"]] + bullet_model_options
+                
+                selected_bullet_model = st.selectbox(
                     "Model", 
-                    value=test_data["ammo"]["bullet"]["model"],
-                    key="bullet_model", 
-                    placeholder="e.g. ELD-M"
+                    options=bullet_model_options + ["Custom..."],
+                    index=bullet_model_options.index(test_data["ammo"]["bullet"]["model"]) if test_data["ammo"]["bullet"]["model"] in bullet_model_options else len(bullet_model_options),
+                    key="bullet_model_select"
                 )
+                if selected_bullet_model == "Custom...":
+                    test_data["ammo"]["bullet"]["model"] = st.text_input(
+                        "Custom Bullet Model", 
+                        value="",
+                        placeholder="e.g. ELD-M",
+                        key="bullet_model_custom"
+                    )
+                else:
+                    test_data["ammo"]["bullet"]["model"] = selected_bullet_model
             with col2:
                 test_data["ammo"]["bullet"]["weight_gr"] = st.number_input(
                     "Weight (gr)", 
@@ -642,18 +838,47 @@ def main():
             st.subheader("Powder")
             col1, col2 = st.columns(2)
             with col1:
-                test_data["ammo"]["powder"]["brand"] = st.text_input(
+                # Use selectbox with option to add custom value for Powder Brand
+                powder_brand_options = component_lists.get("powder_brand", [])
+                if test_data["ammo"]["powder"]["brand"] and test_data["ammo"]["powder"]["brand"] not in powder_brand_options:
+                    powder_brand_options = [test_data["ammo"]["powder"]["brand"]] + powder_brand_options
+                
+                selected_powder_brand = st.selectbox(
                     "Brand", 
-                    value=test_data["ammo"]["powder"]["brand"],
-                    key="powder_brand", 
-                    placeholder="e.g. ADI"
+                    options=powder_brand_options + ["Custom..."],
+                    index=powder_brand_options.index(test_data["ammo"]["powder"]["brand"]) if test_data["ammo"]["powder"]["brand"] in powder_brand_options else len(powder_brand_options),
+                    key="powder_brand_select"
                 )
-                test_data["ammo"]["powder"]["model"] = st.text_input(
+                if selected_powder_brand == "Custom...":
+                    test_data["ammo"]["powder"]["brand"] = st.text_input(
+                        "Custom Powder Brand", 
+                        value="",
+                        placeholder="e.g. ADI",
+                        key="powder_brand_custom"
+                    )
+                else:
+                    test_data["ammo"]["powder"]["brand"] = selected_powder_brand
+                
+                # Use selectbox with option to add custom value for Powder Model
+                powder_model_options = component_lists.get("powder_model", [])
+                if test_data["ammo"]["powder"]["model"] and test_data["ammo"]["powder"]["model"] not in powder_model_options:
+                    powder_model_options = [test_data["ammo"]["powder"]["model"]] + powder_model_options
+                
+                selected_powder_model = st.selectbox(
                     "Model", 
-                    value=test_data["ammo"]["powder"]["model"],
-                    key="powder_model", 
-                    placeholder="e.g. 2208"
+                    options=powder_model_options + ["Custom..."],
+                    index=powder_model_options.index(test_data["ammo"]["powder"]["model"]) if test_data["ammo"]["powder"]["model"] in powder_model_options else len(powder_model_options),
+                    key="powder_model_select"
                 )
+                if selected_powder_model == "Custom...":
+                    test_data["ammo"]["powder"]["model"] = st.text_input(
+                        "Custom Powder Model", 
+                        value="",
+                        placeholder="e.g. 2208",
+                        key="powder_model_custom"
+                    )
+                else:
+                    test_data["ammo"]["powder"]["model"] = selected_powder_model
             with col2:
                 test_data["ammo"]["powder"]["charge_gr"] = st.number_input(
                     "Charge (gr)", 
@@ -673,18 +898,47 @@ def main():
             st.subheader("Primer")
             col1, col2 = st.columns(2)
             with col1:
-                test_data["ammo"]["primer"]["brand"] = st.text_input(
+                # Use selectbox with option to add custom value for Primer Brand
+                primer_brand_options = component_lists.get("primer_brand", [])
+                if test_data["ammo"]["primer"]["brand"] and test_data["ammo"]["primer"]["brand"] not in primer_brand_options:
+                    primer_brand_options = [test_data["ammo"]["primer"]["brand"]] + primer_brand_options
+                
+                selected_primer_brand = st.selectbox(
                     "Brand", 
-                    value=test_data["ammo"]["primer"]["brand"],
-                    key="primer_brand", 
-                    placeholder="e.g. CCI"
+                    options=primer_brand_options + ["Custom..."],
+                    index=primer_brand_options.index(test_data["ammo"]["primer"]["brand"]) if test_data["ammo"]["primer"]["brand"] in primer_brand_options else len(primer_brand_options),
+                    key="primer_brand_select"
                 )
-                test_data["ammo"]["primer"]["model"] = st.text_input(
+                if selected_primer_brand == "Custom...":
+                    test_data["ammo"]["primer"]["brand"] = st.text_input(
+                        "Custom Primer Brand", 
+                        value="",
+                        placeholder="e.g. CCI",
+                        key="primer_brand_custom"
+                    )
+                else:
+                    test_data["ammo"]["primer"]["brand"] = selected_primer_brand
+                
+                # Use selectbox with option to add custom value for Primer Model
+                primer_model_options = component_lists.get("primer_model", [])
+                if test_data["ammo"]["primer"]["model"] and test_data["ammo"]["primer"]["model"] not in primer_model_options:
+                    primer_model_options = [test_data["ammo"]["primer"]["model"]] + primer_model_options
+                
+                selected_primer_model = st.selectbox(
                     "Model", 
-                    value=test_data["ammo"]["primer"]["model"],
-                    key="primer_model", 
-                    placeholder="e.g. BR4"
+                    options=primer_model_options + ["Custom..."],
+                    index=primer_model_options.index(test_data["ammo"]["primer"]["model"]) if test_data["ammo"]["primer"]["model"] in primer_model_options else len(primer_model_options),
+                    key="primer_model_select"
                 )
+                if selected_primer_model == "Custom...":
+                    test_data["ammo"]["primer"]["model"] = st.text_input(
+                        "Custom Primer Model", 
+                        value="",
+                        placeholder="e.g. BR4",
+                        key="primer_model_custom"
+                    )
+                else:
+                    test_data["ammo"]["primer"]["model"] = selected_primer_model
             with col2:
                 test_data["ammo"]["primer"]["lot"] = st.text_input(
                     "Lot", 
@@ -878,3 +1132,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Add a link to the admin page in the sidebar
+st.sidebar.markdown("---")
+st.sidebar.markdown("[Component List Admin](/admin)")
