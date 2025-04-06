@@ -1135,4 +1135,7 @@ if __name__ == "__main__":
 
 # Add a link to the admin page in the sidebar
 st.sidebar.markdown("---")
-st.sidebar.markdown("[Component List Admin](/admin)")
+st.sidebar.markdown("### Admin")
+if st.sidebar.button("Open Component List Admin"):
+    import webbrowser
+    webbrowser.open("http://localhost:8502")
