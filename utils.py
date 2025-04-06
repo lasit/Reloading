@@ -67,8 +67,10 @@ def save_yaml(file_path: str, data: Dict[str, Any]) -> None:
         file_path: Path where the YAML file will be saved
         data: Dictionary to save as YAML
     """
-    # Ensure the directory exists
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    # Ensure the directory exists if file_path contains a directory
+    dir_name = os.path.dirname(file_path)
+    if dir_name:  # Only create directories if there's a directory path
+        os.makedirs(dir_name, exist_ok=True)
     
     with open(file_path, 'w') as file:
         yaml.dump(data, file, default_flow_style=False, sort_keys=False)
