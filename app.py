@@ -363,101 +363,146 @@ def main():
         
         col1, col2 = st.columns(2)
         with col1:
-            # Use selectbox with option to add custom value
+            # Calibre - Combined dropdown and text input
             calibre_options = component_lists.get("calibre", [])
             if test_data["platform"]["calibre"] and test_data["platform"]["calibre"] not in calibre_options:
                 calibre_options = [test_data["platform"]["calibre"]] + calibre_options
             
-            gen_calibre = st.selectbox(
+            # Create a container for the calibre input
+            calibre_container = st.container()
+            
+            # Add a selectbox for existing options
+            calibre_selection = calibre_container.selectbox(
                 "Calibre *", 
                 options=calibre_options + ["Custom..."],
                 index=calibre_options.index(test_data["platform"]["calibre"]) if test_data["platform"]["calibre"] in calibre_options else len(calibre_options),
-                key="gen_calibre"
+                key="gen_calibre_select"
             )
-            if gen_calibre == "Custom...":
-                gen_calibre = st.text_input(
-                    "Custom Calibre *", 
+            
+            # Set the value based on selection
+            if calibre_selection == "Custom...":
+                # Show a text input in the same container
+                gen_calibre = calibre_container.text_input(
+                    "Enter custom calibre *", 
                     value="",
                     placeholder="e.g. 223_Rem",
                     key="gen_calibre_custom"
                 )
+            else:
+                gen_calibre = calibre_selection
             
-            # Rifle selectbox
+            # Rifle - Combined dropdown and text input
             rifle_options = component_lists.get("rifle", [])
             if test_data["platform"]["rifle"] and test_data["platform"]["rifle"] not in rifle_options:
                 rifle_options = [test_data["platform"]["rifle"]] + rifle_options
-                
-            gen_rifle = st.selectbox(
+            
+            # Create a container for the rifle input
+            rifle_container = st.container()
+            
+            # Add a selectbox for existing options
+            rifle_selection = rifle_container.selectbox(
                 "Rifle *", 
                 options=rifle_options + ["Custom..."],
                 index=rifle_options.index(test_data["platform"]["rifle"]) if test_data["platform"]["rifle"] in rifle_options else len(rifle_options),
-                key="gen_rifle"
+                key="gen_rifle_select"
             )
-            if gen_rifle == "Custom...":
-                gen_rifle = st.text_input(
-                    "Custom Rifle *", 
+            
+            # Set the value based on selection
+            if rifle_selection == "Custom...":
+                # Show a text input in the same container
+                gen_rifle = rifle_container.text_input(
+                    "Enter custom rifle *", 
                     value="",
                     placeholder="e.g. Tikka_T3x",
                     key="gen_rifle_custom"
                 )
+            else:
+                gen_rifle = rifle_selection
             
-            # Case Brand selectbox
+            # Case Brand - Combined dropdown and text input
             case_brand_options = component_lists.get("case_brand", [])
             if test_data["ammo"]["case"]["brand"] and test_data["ammo"]["case"]["brand"] not in case_brand_options:
                 case_brand_options = [test_data["ammo"]["case"]["brand"]] + case_brand_options
-                
-            gen_case_brand = st.selectbox(
+            
+            # Create a container for the case brand input
+            case_brand_container = st.container()
+            
+            # Add a selectbox for existing options
+            case_brand_selection = case_brand_container.selectbox(
                 "Case Brand *", 
                 options=case_brand_options + ["Custom..."],
                 index=case_brand_options.index(test_data["ammo"]["case"]["brand"]) if test_data["ammo"]["case"]["brand"] in case_brand_options else len(case_brand_options),
-                key="gen_case_brand"
+                key="gen_case_brand_select"
             )
-            if gen_case_brand == "Custom...":
-                gen_case_brand = st.text_input(
-                    "Custom Case Brand *", 
+            
+            # Set the value based on selection
+            if case_brand_selection == "Custom...":
+                # Show a text input in the same container
+                gen_case_brand = case_brand_container.text_input(
+                    "Enter custom case brand *", 
                     value="",
                     placeholder="e.g. Lapua",
                     key="gen_case_brand_custom"
                 )
+            else:
+                gen_case_brand = case_brand_selection
         
         with col2:
-            # Bullet Brand selectbox
+            # Bullet Brand - Combined dropdown and text input
             bullet_brand_options = component_lists.get("bullet_brand", [])
             if test_data["ammo"]["bullet"]["brand"] and test_data["ammo"]["bullet"]["brand"] not in bullet_brand_options:
                 bullet_brand_options = [test_data["ammo"]["bullet"]["brand"]] + bullet_brand_options
-                
-            gen_bullet_brand = st.selectbox(
+            
+            # Create a container for the bullet brand input
+            bullet_brand_container = st.container()
+            
+            # Add a selectbox for existing options
+            bullet_brand_selection = bullet_brand_container.selectbox(
                 "Bullet Brand *", 
                 options=bullet_brand_options + ["Custom..."],
                 index=bullet_brand_options.index(test_data["ammo"]["bullet"]["brand"]) if test_data["ammo"]["bullet"]["brand"] in bullet_brand_options else len(bullet_brand_options),
-                key="gen_bullet_brand"
+                key="gen_bullet_brand_select"
             )
-            if gen_bullet_brand == "Custom...":
-                gen_bullet_brand = st.text_input(
-                    "Custom Bullet Brand *", 
+            
+            # Set the value based on selection
+            if bullet_brand_selection == "Custom...":
+                # Show a text input in the same container
+                gen_bullet_brand = bullet_brand_container.text_input(
+                    "Enter custom bullet brand *", 
                     value="",
                     placeholder="e.g. Hornady",
                     key="gen_bullet_brand_custom"
                 )
+            else:
+                gen_bullet_brand = bullet_brand_selection
             
-            # Bullet Model selectbox
+            # Bullet Model - Combined dropdown and text input
             bullet_model_options = component_lists.get("bullet_model", [])
             if test_data["ammo"]["bullet"]["model"] and test_data["ammo"]["bullet"]["model"] not in bullet_model_options:
                 bullet_model_options = [test_data["ammo"]["bullet"]["model"]] + bullet_model_options
-                
-            gen_bullet_model = st.selectbox(
+            
+            # Create a container for the bullet model input
+            bullet_model_container = st.container()
+            
+            # Add a selectbox for existing options
+            bullet_model_selection = bullet_model_container.selectbox(
                 "Bullet Model *", 
                 options=bullet_model_options + ["Custom..."],
                 index=bullet_model_options.index(test_data["ammo"]["bullet"]["model"]) if test_data["ammo"]["bullet"]["model"] in bullet_model_options else len(bullet_model_options),
-                key="gen_bullet_model"
+                key="gen_bullet_model_select"
             )
-            if gen_bullet_model == "Custom...":
-                gen_bullet_model = st.text_input(
-                    "Custom Bullet Model *", 
+            
+            # Set the value based on selection
+            if bullet_model_selection == "Custom...":
+                # Show a text input in the same container
+                gen_bullet_model = bullet_model_container.text_input(
+                    "Enter custom bullet model *", 
                     value="",
                     placeholder="e.g. ELD-M",
                     key="gen_bullet_model_custom"
                 )
+            else:
+                gen_bullet_model = bullet_model_selection
             
             gen_bullet_weight = st.number_input(
                 "Bullet Weight (gr) *", 
@@ -469,43 +514,61 @@ def main():
         
         col1, col2 = st.columns(2)
         with col1:
-            # Powder Brand selectbox
+            # Powder Brand - Combined dropdown and text input
             powder_brand_options = component_lists.get("powder_brand", [])
             if test_data["ammo"]["powder"]["brand"] and test_data["ammo"]["powder"]["brand"] not in powder_brand_options:
                 powder_brand_options = [test_data["ammo"]["powder"]["brand"]] + powder_brand_options
-                
-            gen_powder_brand = st.selectbox(
+            
+            # Create a container for the powder brand input
+            powder_brand_container = st.container()
+            
+            # Add a selectbox for existing options
+            powder_brand_selection = powder_brand_container.selectbox(
                 "Powder Brand *", 
                 options=powder_brand_options + ["Custom..."],
                 index=powder_brand_options.index(test_data["ammo"]["powder"]["brand"]) if test_data["ammo"]["powder"]["brand"] in powder_brand_options else len(powder_brand_options),
-                key="gen_powder_brand"
+                key="gen_powder_brand_select"
             )
-            if gen_powder_brand == "Custom...":
-                gen_powder_brand = st.text_input(
-                    "Custom Powder Brand *", 
+            
+            # Set the value based on selection
+            if powder_brand_selection == "Custom...":
+                # Show a text input in the same container
+                gen_powder_brand = powder_brand_container.text_input(
+                    "Enter custom powder brand *", 
                     value="",
                     placeholder="e.g. ADI",
                     key="gen_powder_brand_custom"
                 )
+            else:
+                gen_powder_brand = powder_brand_selection
             
-            # Powder Model selectbox
+            # Powder Model - Combined dropdown and text input
             powder_model_options = component_lists.get("powder_model", [])
             if test_data["ammo"]["powder"]["model"] and test_data["ammo"]["powder"]["model"] not in powder_model_options:
                 powder_model_options = [test_data["ammo"]["powder"]["model"]] + powder_model_options
-                
-            gen_powder_model = st.selectbox(
+            
+            # Create a container for the powder model input
+            powder_model_container = st.container()
+            
+            # Add a selectbox for existing options
+            powder_model_selection = powder_model_container.selectbox(
                 "Powder Model *", 
                 options=powder_model_options + ["Custom..."],
                 index=powder_model_options.index(test_data["ammo"]["powder"]["model"]) if test_data["ammo"]["powder"]["model"] in powder_model_options else len(powder_model_options),
-                key="gen_powder_model"
+                key="gen_powder_model_select"
             )
-            if gen_powder_model == "Custom...":
-                gen_powder_model = st.text_input(
-                    "Custom Powder Model *", 
+            
+            # Set the value based on selection
+            if powder_model_selection == "Custom...":
+                # Show a text input in the same container
+                gen_powder_model = powder_model_container.text_input(
+                    "Enter custom powder model *", 
                     value="",
                     placeholder="e.g. 2208",
                     key="gen_powder_model_custom"
                 )
+            else:
+                gen_powder_model = powder_model_selection
             
             gen_powder_charge = st.number_input(
                 "Powder Charge (gr) *", 
@@ -524,43 +587,61 @@ def main():
                 key="gen_coal"
             )
             
-            # Primer Brand selectbox
+            # Primer Brand - Combined dropdown and text input
             primer_brand_options = component_lists.get("primer_brand", [])
             if test_data["ammo"]["primer"]["brand"] and test_data["ammo"]["primer"]["brand"] not in primer_brand_options:
                 primer_brand_options = [test_data["ammo"]["primer"]["brand"]] + primer_brand_options
-                
-            gen_primer_brand = st.selectbox(
+            
+            # Create a container for the primer brand input
+            primer_brand_container = st.container()
+            
+            # Add a selectbox for existing options
+            primer_brand_selection = primer_brand_container.selectbox(
                 "Primer Brand *", 
                 options=primer_brand_options + ["Custom..."],
                 index=primer_brand_options.index(test_data["ammo"]["primer"]["brand"]) if test_data["ammo"]["primer"]["brand"] in primer_brand_options else len(primer_brand_options),
-                key="gen_primer_brand"
+                key="gen_primer_brand_select"
             )
-            if gen_primer_brand == "Custom...":
-                gen_primer_brand = st.text_input(
-                    "Custom Primer Brand *", 
+            
+            # Set the value based on selection
+            if primer_brand_selection == "Custom...":
+                # Show a text input in the same container
+                gen_primer_brand = primer_brand_container.text_input(
+                    "Enter custom primer brand *", 
                     value="",
                     placeholder="e.g. CCI",
                     key="gen_primer_brand_custom"
                 )
+            else:
+                gen_primer_brand = primer_brand_selection
             
-            # Primer Model selectbox
+            # Primer Model - Combined dropdown and text input
             primer_model_options = component_lists.get("primer_model", [])
             if test_data["ammo"]["primer"]["model"] and test_data["ammo"]["primer"]["model"] not in primer_model_options:
                 primer_model_options = [test_data["ammo"]["primer"]["model"]] + primer_model_options
-                
-            gen_primer_model = st.selectbox(
+            
+            # Create a container for the primer model input
+            primer_model_container = st.container()
+            
+            # Add a selectbox for existing options
+            primer_model_selection = primer_model_container.selectbox(
                 "Primer Model *", 
                 options=primer_model_options + ["Custom..."],
                 index=primer_model_options.index(test_data["ammo"]["primer"]["model"]) if test_data["ammo"]["primer"]["model"] in primer_model_options else len(primer_model_options),
-                key="gen_primer_model"
+                key="gen_primer_model_select"
             )
-            if gen_primer_model == "Custom...":
-                gen_primer_model = st.text_input(
-                    "Custom Primer Model *", 
+            
+            # Set the value based on selection
+            if primer_model_selection == "Custom...":
+                # Show a text input in the same container
+                gen_primer_model = primer_model_container.text_input(
+                    "Enter custom primer model *", 
                     value="",
                     placeholder="e.g. BR4",
                     key="gen_primer_model_custom"
                 )
+            else:
+                gen_primer_model = primer_model_selection
         
         # Check if all required fields are filled
         all_fields_filled = (
