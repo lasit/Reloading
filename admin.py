@@ -28,24 +28,24 @@ def main():
         "Primer Model"
     ])
     
-    # Map tab indices to component list keys
-    component_keys = [
-        "calibre", 
-        "rifle", 
-        "case_brand", 
-        "powder_brand", 
-        "powder_model", 
-        "bullet_brand", 
-        "bullet_model", 
-        "primer_brand", 
-        "primer_model"
+    # Map tab indices to component list keys and names
+    component_info = [
+        {"key": "calibre", "name": "Calibre"},
+        {"key": "rifle", "name": "Rifle"},
+        {"key": "case_brand", "name": "Case Brand"},
+        {"key": "powder_brand", "name": "Powder Brand"},
+        {"key": "powder_model", "name": "Powder Model"},
+        {"key": "bullet_brand", "name": "Bullet Brand"},
+        {"key": "bullet_model", "name": "Bullet Model"},
+        {"key": "primer_brand", "name": "Primer Brand"},
+        {"key": "primer_model", "name": "Primer Model"}
     ]
     
     # Display and edit each component list
     for i, tab in enumerate(tabs):
         with tab:
-            component_key = component_keys[i]
-            component_name = tab.label
+            component_key = component_info[i]["key"]
+            component_name = component_info[i]["name"]
             
             st.header(f"{component_name} List")
             
