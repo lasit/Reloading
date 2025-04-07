@@ -53,7 +53,8 @@ def create_empty_test_data() -> Dict[str, Any]:
                 "model": "",
                 "lot": ""
             },
-            "coal_in": 0.0
+            "coal_in": 0.0,
+            "b2o_in": 0.0
         },
         
         "environment": {
@@ -115,7 +116,7 @@ def parse_test_id(test_id: str) -> Tuple[str, str, str, str, str, str, str, str,
         parts = rest.split('_')
         
         # Check if we have enough parts for the new format
-        if len(parts) >= 13:
+        if len(parts) >= 14:
             # New format with all brand fields
             distance = parts[0]
             calibre = parts[1]
@@ -128,9 +129,18 @@ def parse_test_id(test_id: str) -> Tuple[str, str, str, str, str, str, str, str,
             powder_model = parts[8]
             charge = parts[9]
             coal = parts[10]
-            primer_brand = parts[11]
-            primer_model = parts[12]
+            b2o = parts[11]
+            primer_brand = parts[12]
+            primer_model = parts[13]
             
+            # Parse B2O
+            if b2o.endswith('in'):
+                b2o = b2o[:-2]  # Remove 'in' suffix
+            try:
+                data["ammo"]["b2o_in"] = float(b2o)
+            except ValueError:
+                pass
+
             return (date_part, distance, calibre, rifle, case_brand, bullet_brand, bullet_model, bullet_weight, powder_brand, powder_model, charge, coal, primer_brand, primer_model)
         else:
             # Old format without brand fields
@@ -165,7 +175,7 @@ def parse_test_id(test_id: str) -> Tuple[str, str, str, str, str, str, str, str,
 def generate_test_id(date: str, distance_m: int, calibre: str, rifle: str, 
                     case_brand: str, bullet_brand: str, bullet_model: str, bullet_weight: float, 
                     powder_brand: str, powder_model: str, powder_charge: float, 
-                    coal: float, primer_brand: str, primer_model: str) -> str:
+                    coal: float, b2o: float, primer_brand: str, primer_model: str) -> str:
     """
     Generate a test ID from components.
     
@@ -196,7 +206,7 @@ def generate_test_id(date: str, distance_m: int, calibre: str, rifle: str,
     
     # Format the test ID with the original format
     # Use integer values for weights (no decimal points) and format COAL with 3 decimal places
-    test_id = f"{date_str}__{distance_m}m_{calibre_clean}_{rifle_clean}_{case_brand_clean}_{bullet_brand_clean}_{bullet_model_clean}_{int(bullet_weight)}gr_{powder_brand_clean}_{powder_model_clean}_{int(powder_charge)}gr_{coal:.3f}in_{primer_brand_clean}_{primer_model_clean}"
+    test_id = f"{date_str}__{distance_m}m_{calibre_clean}_{rifle_clean}_{case_brand_clean}_{bullet_brand_clean}_{bullet_model_clean}_{int(bullet_weight)}gr_{powder_brand_clean}_{powder_model_clean}_{int(powder_charge)}gr_{coal:.3f}in_{b2o:.3f}in_{primer_brand_clean}_{primer_model_clean}"
     
     return test_id
 
@@ -536,6 +546,10 @@ def main():
         generate_id = st.button("Generate Test ID", disabled=not all_fields_filled)
         
         if generate_id and all_fields_filled:
+            # Ensure b2o_in exists in test_data
+            if "b2o_in" not in test_data["ammo"]:
+                test_data["ammo"]["b2o_in"] = 0.0
+                
             # Get values from form
             new_test_id = generate_test_id(
                 gen_date.isoformat(),
@@ -550,6 +564,7 @@ def main():
                 gen_powder_model,
                 gen_powder_charge,
                 gen_coal,
+                test_data["ammo"]["b2o_in"],
                 gen_primer_brand,
                 gen_primer_model
             )
@@ -948,9 +963,19 @@ def main():
             # COAL
             st.subheader("Cartridge Measurements")
             test_data["ammo"]["coal_in"] = st.number_input(
-                "Cartridge Overall Length (inches)", 
+                "Cartridge Overall Length - COAL (inches)", 
                 min_value=0.0, 
                 value=float(test_data["ammo"]["coal_in"]),
+                step=0.001
+            )
+            # Ensure b2o_in exists in test_data
+            if "b2o_in" not in test_data["ammo"]:
+                test_data["ammo"]["b2o_in"] = 0.0
+                
+            test_data["ammo"]["b2o_in"] = st.number_input(
+                "Cartridge Base to Ogive - B2O (inches)",
+                min_value=0.0,
+                value=float(test_data["ammo"]["b2o_in"]),
                 step=0.001
             )
         

@@ -48,7 +48,8 @@ def create_empty_test_data() -> Dict[str, Any]:
                 "model": "",
                 "lot": ""
             },
-            "coal_in": 0.0
+            "coal_in": 0.0,
+            "b2o_in": 0.0
         },
         
         "environment": {
@@ -133,7 +134,7 @@ def parse_test_id(test_id: str) -> Dict[str, Any]:
         # Split the rest by single underscore
         parts = rest.split('_')
         
-        if len(parts) < 9:
+        if len(parts) < 10:
             # Not enough parts, return empty data
             return data
         
@@ -182,9 +183,18 @@ def parse_test_id(test_id: str) -> Dict[str, Any]:
             data["ammo"]["coal_in"] = float(coal_str)
         except ValueError:
             pass
+
+        # Parse B2O
+        b2o_str = parts[8]
+        if b2o_str.endswith('in'):
+            b2o_str = b2o_str[:-2]  # Remove 'in' suffix
+        try:
+            data["ammo"]["b2o_in"] = float(b2o_str)
+        except ValueError:
+            pass
         
         # Parse primer
-        data["ammo"]["primer"]["model"] = parts[8]
+        data["ammo"]["primer"]["model"] = parts[9]
         
     except Exception as e:
         print(f"Error parsing test ID: {e}")
@@ -218,7 +228,7 @@ def generate_test_id(data: Dict[str, Any]) -> str:
     primer_model_clean = clean_str(data["ammo"]["primer"]["model"])
     
     # Format the test ID
-    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']}gr_{data['ammo']['coal_in']}in_{primer_model_clean}"
+    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']}gr_{data['ammo']['coal_in']}in_{data['ammo']['b2o_in']}in_{primer_model_clean}"
     
     return test_id
 
@@ -406,12 +416,18 @@ def create_test_form(test_data: Dict[str, Any], new_test: bool = False) -> Dict[
                     placeholder="e.g. CCI-BR4-B1"
                 )
             
-            # COAL
+            # Cartridge Measurements
             st.subheader("Cartridge Measurements")
             test_data["ammo"]["coal_in"] = st.number_input(
-                "Cartridge Overall Length (inches)", 
+                "Cartridge Overall Length - COAL (inches)", 
                 min_value=0.0, 
                 value=float(test_data["ammo"]["coal_in"]),
+                step=0.001
+            )
+            test_data["ammo"]["b2o_in"] = st.number_input(
+                "Cartridge Base to Ogive - B2O (inches)",
+                min_value=0.0,
+                value=float(test_data["ammo"]["b2o_in"]),
                 step=0.001
             )
         
