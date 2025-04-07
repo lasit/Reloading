@@ -1034,52 +1034,54 @@ def main():
             
             col1, col2 = st.columns(2)
             with col1:
-                test_data["group"]["group_es_mm"] = st.number_input(
-                    "Group Extreme Spread (mm)", 
-                    min_value=0.0, 
-                    value=float(test_data["group"]["group_es_mm"]),
-                    step=0.1
-                )
-                test_data["group"]["group_es_moa"] = st.number_input(
-                    "Group Extreme Spread (MOA)", 
-                    min_value=0.0, 
-                    value=float(test_data["group"]["group_es_moa"]),
-                    step=0.01
-                )
-                test_data["group"]["group_es_x_mm"] = st.number_input(
-                    "Group Extreme Spread X (mm)", 
-                    min_value=0.0, 
-                    value=float(test_data["group"]["group_es_x_mm"]),
-                    step=0.1
-                )
-            with col2:
-                test_data["group"]["group_es_y_mm"] = st.number_input(
-                    "Group Extreme Spread Y (mm)", 
-                    min_value=0.0, 
-                    value=float(test_data["group"]["group_es_y_mm"]),
-                    step=0.1
-                )
-                test_data["group"]["mean_radius_mm"] = st.number_input(
-                    "Mean Radius (mm)", 
-                    min_value=0.0, 
-                    value=float(test_data["group"]["mean_radius_mm"]),
-                    step=0.1
-                )
                 test_data["group"]["shots"] = st.number_input(
                     "Number of Shots", 
                     min_value=1, 
                     value=int(test_data["group"]["shots"]),
                     step=1
                 )
-            
-            col1, col2 = st.columns(2)
-            with col1:
+                
+                test_data["group"]["group_es_mm"] = st.number_input(
+                    "Group Extreme Spread (mm)", 
+                    min_value=0.0, 
+                    value=float(test_data["group"]["group_es_mm"]),
+                    step=0.1
+                )
+                
+                test_data["group"]["group_es_moa"] = st.number_input(
+                    "Group Extreme Spread (MOA)", 
+                    min_value=0.0, 
+                    value=float(test_data["group"]["group_es_moa"]),
+                    step=0.01
+                )
+                
+                test_data["group"]["mean_radius_mm"] = st.number_input(
+                    "Mean Radius (mm)", 
+                    min_value=0.0, 
+                    value=float(test_data["group"]["mean_radius_mm"]),
+                    step=0.1
+                )
+            with col2:
+                test_data["group"]["group_es_x_mm"] = st.number_input(
+                    "Group Extreme Spread X (mm)", 
+                    min_value=0.0, 
+                    value=float(test_data["group"]["group_es_x_mm"]),
+                    step=0.1
+                )
+                
+                test_data["group"]["group_es_y_mm"] = st.number_input(
+                    "Group Extreme Spread Y (mm)", 
+                    min_value=0.0, 
+                    value=float(test_data["group"]["group_es_y_mm"]),
+                    step=0.1
+                )
+                
                 test_data["group"]["poi_x_mm"] = st.number_input(
                     "Point of Impact X (mm)", 
                     value=float(test_data["group"]["poi_x_mm"]),
                     step=0.1
                 )
-            with col2:
+                
                 test_data["group"]["poi_y_mm"] = st.number_input(
                     "Point of Impact Y (mm)", 
                     value=float(test_data["group"]["poi_y_mm"]),
