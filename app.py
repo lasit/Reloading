@@ -1201,9 +1201,15 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Add a link to the admin page in the sidebar
+# Add links to other pages in the sidebar
 st.sidebar.markdown("---")
-st.sidebar.markdown("### Admin")
-if st.sidebar.button("Open Component List Admin"):
-    import webbrowser
-    webbrowser.open("http://localhost:8502")
+st.sidebar.markdown("### Navigation")
+col1, col2 = st.sidebar.columns(2)
+with col1:
+    if st.sidebar.button("Data Analysis"):
+        import webbrowser
+        webbrowser.open("http://localhost:8502")
+with col2:
+    if st.sidebar.button("Admin"):
+        import webbrowser
+        webbrowser.open("http://localhost:8503")
