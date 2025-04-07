@@ -1,0 +1,57 @@
+test_id: 2025-03-23__600m_30-06_Tikka-T1X_Hornady_Berger_ELD-M_75gr_Hogson_2208_24gr_2.412in_1.783in_CCI_4033
+date: '2025-03-23'
+distance_m: 600
+platform:
+  calibre: 30-06
+  rifle: Tikka T1X
+  barrel_length_in: 19.5
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-12
+    neck_turned: 'No'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-41
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 24.1
+    lot: LOT-96
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-36
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 30
+  humidity_percent: 40
+  pressure_hpa: 1010
+  wind_speed_mps: 6
+  wind_dir_deg: 60
+  weather: Overcast
+group:
+  group_es_mm: 156.6
+  group_es_moa: 0.7
+  group_es_x_mm: 59.1
+  group_es_y_mm: 173.2
+  mean_radius_mm: 44.6
+  poi_x_mm: 91.9
+  poi_y_mm: 177.3
+  shots: 8
+chrono:
+  avg_velocity_fps: 1763.4
+  sd_fps: 26.9
+  es_fps: 67.0
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Hot and humid conditions with mirage affecting sight picture. The weather was
+  clear with a slight breeze from the east.

@@ -1,0 +1,57 @@
+test_id: 2025-08-12__100m_30-06_Tikka-T1X_Sako_Hornady_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_CCI_4033
+date: '2025-08-12'
+distance_m: 100
+platform:
+  calibre: 30-06
+  rifle: Tikka T1X
+  barrel_length_in: 25.8
+  twist_rate: '1:8'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-20
+    neck_turned: 'Yes'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-64
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.7
+    lot: LOT-51
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-26
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 60
+  pressure_hpa: 1010
+  wind_speed_mps: 2
+  wind_dir_deg: 30
+  weather: Clear
+group:
+  group_es_mm: 121.7
+  group_es_moa: 1.03
+  group_es_x_mm: 43.8
+  group_es_y_mm: 189.0
+  mean_radius_mm: 37.0
+  poi_x_mm: 166.6
+  poi_y_mm: 163.9
+  shots: 14
+chrono:
+  avg_velocity_fps: 1835.9
+  sd_fps: 15.0
+  es_fps: 56.3
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Changing wind directions throughout the test session. Hot and humid conditions
+  with mirage affecting sight picture.

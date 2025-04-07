@@ -1,0 +1,57 @@
+test_id: 2025-02-13__300m_223_Tikka-T1X_Hornady_Berger_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_CCI_4033
+date: '2025-02-13'
+distance_m: 300
+platform:
+  calibre: '223'
+  rifle: Tikka T1X
+  barrel_length_in: 23.3
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-51
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-44
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.5
+    lot: LOT-21
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-78
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 40
+  pressure_hpa: 1008
+  wind_speed_mps: 6
+  wind_dir_deg: 90
+  weather: Variable
+group:
+  group_es_mm: 187.4
+  group_es_moa: 0.28
+  group_es_x_mm: 86.0
+  group_es_y_mm: 118.8
+  mean_radius_mm: 29.6
+  poi_x_mm: 131.3
+  poi_y_mm: 43.8
+  shots: 8
+chrono:
+  avg_velocity_fps: 1815.1
+  sd_fps: 13.4
+  es_fps: 64.6
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Overcast conditions with occasional gusts of wind. Light rain started during
+  the test but did not significantly impact results.

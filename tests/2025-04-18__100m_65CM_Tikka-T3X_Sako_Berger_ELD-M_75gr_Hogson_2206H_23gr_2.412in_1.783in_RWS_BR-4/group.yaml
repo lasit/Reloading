@@ -1,0 +1,57 @@
+test_id: 2025-04-18__100m_65CM_Tikka-T3X_Sako_Berger_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_RWS_BR-4
+date: '2025-04-18'
+distance_m: 100
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T3X
+  barrel_length_in: 23.3
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-87
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-79
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.6
+    lot: LOT-66
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-77
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 60
+  pressure_hpa: 1009
+  wind_speed_mps: 0
+  wind_dir_deg: 30
+  weather: Clear
+group:
+  group_es_mm: 160.1
+  group_es_moa: 2.0
+  group_es_x_mm: 17.0
+  group_es_y_mm: 38.6
+  mean_radius_mm: 39.8
+  poi_x_mm: 113.7
+  poi_y_mm: 36.3
+  shots: 14
+chrono:
+  avg_velocity_fps: 1703.3
+  sd_fps: 18.0
+  es_fps: 19.1
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Cool morning with stable air and good visibility. Strong winds from the north
+  affected shot placement.

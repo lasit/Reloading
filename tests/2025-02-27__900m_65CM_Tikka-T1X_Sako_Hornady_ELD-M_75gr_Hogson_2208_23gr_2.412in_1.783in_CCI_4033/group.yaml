@@ -1,0 +1,57 @@
+test_id: 2025-02-27__900m_65CM_Tikka-T1X_Sako_Hornady_ELD-M_75gr_Hogson_2208_23gr_2.412in_1.783in_CCI_4033
+date: '2025-02-27'
+distance_m: 900
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T1X
+  barrel_length_in: 19.2
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-86
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-30
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 23.9
+    lot: LOT-67
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-27
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 40
+  pressure_hpa: 1009
+  wind_speed_mps: 2
+  wind_dir_deg: 0
+  weather: Rain
+group:
+  group_es_mm: 125.2
+  group_es_moa: 1.14
+  group_es_x_mm: 15.4
+  group_es_y_mm: 138.7
+  mean_radius_mm: 46.2
+  poi_x_mm: 147.9
+  poi_y_mm: 110.9
+  shots: 14
+chrono:
+  avg_velocity_fps: 1832.1
+  sd_fps: 24.1
+  es_fps: 93.3
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Cool morning with stable air and good visibility. The weather was clear with
+  a slight breeze from the east.

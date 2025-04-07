@@ -1,0 +1,57 @@
+test_id: 2025-07-03__300m_30-06_Tikka-T1X_Lapua_Berger_ELD-M_75gr_ADI_2206H_24gr_2.412in_1.783in_RWS_BR-4
+date: '2025-07-03'
+distance_m: 300
+platform:
+  calibre: 30-06
+  rifle: Tikka T1X
+  barrel_length_in: 26.8
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-59
+    neck_turned: 'No'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-72
+  powder:
+    brand: ADI
+    model: 2206H
+    charge_gr: 24.0
+    lot: LOT-98
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-21
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 80
+  pressure_hpa: 1009
+  wind_speed_mps: 4
+  wind_dir_deg: 90
+  weather: Fog
+group:
+  group_es_mm: 84.2
+  group_es_moa: 1.85
+  group_es_x_mm: 75.6
+  group_es_y_mm: 175.7
+  mean_radius_mm: 11.9
+  poi_x_mm: 179.1
+  poi_y_mm: 117.0
+  shots: 16
+chrono:
+  avg_velocity_fps: 1851.2
+  sd_fps: 18.8
+  es_fps: 69.9
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Strong winds from the north affected shot placement. Excellent visibility with
+  stable atmospheric conditions.

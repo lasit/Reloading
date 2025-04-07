@@ -1,0 +1,57 @@
+test_id: 2025-03-21__600m_30-06_Tikka-T3X_Sako_Hornady_ELD-M_75gr_ADI_2208_23gr_2.412in_1.783in_RWS_4033
+date: '2025-03-21'
+distance_m: 600
+platform:
+  calibre: 30-06
+  rifle: Tikka T3X
+  barrel_length_in: 22.1
+  twist_rate: '1:8'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-65
+    neck_turned: 'No'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-92
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 23.5
+    lot: LOT-48
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-59
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 60
+  pressure_hpa: 1009
+  wind_speed_mps: 6
+  wind_dir_deg: 0
+  weather: Overcast
+group:
+  group_es_mm: 34.4
+  group_es_moa: 0.59
+  group_es_x_mm: 139.4
+  group_es_y_mm: 23.5
+  mean_radius_mm: 15.2
+  poi_x_mm: 45.8
+  poi_y_mm: 15.5
+  shots: 10
+chrono:
+  avg_velocity_fps: 1861.7
+  sd_fps: 6.5
+  es_fps: 83.2
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Overcast conditions with occasional gusts of wind. Excellent visibility with
+  stable atmospheric conditions.

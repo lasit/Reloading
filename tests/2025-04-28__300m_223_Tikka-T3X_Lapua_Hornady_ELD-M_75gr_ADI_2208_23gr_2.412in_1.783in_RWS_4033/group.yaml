@@ -1,0 +1,57 @@
+test_id: 2025-04-28__300m_223_Tikka-T3X_Lapua_Hornady_ELD-M_75gr_ADI_2208_23gr_2.412in_1.783in_RWS_4033
+date: '2025-04-28'
+distance_m: 300
+platform:
+  calibre: '223'
+  rifle: Tikka T3X
+  barrel_length_in: 21.9
+  twist_rate: '1:10'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-10
+    neck_turned: 'No'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-38
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 23.9
+    lot: LOT-30
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-67
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 80
+  pressure_hpa: 1009
+  wind_speed_mps: 6
+  wind_dir_deg: 30
+  weather: Overcast
+group:
+  group_es_mm: 19.0
+  group_es_moa: 0.54
+  group_es_x_mm: 94.3
+  group_es_y_mm: 57.0
+  mean_radius_mm: 46.4
+  poi_x_mm: 39.2
+  poi_y_mm: 79.8
+  shots: 10
+chrono:
+  avg_velocity_fps: 1756.2
+  sd_fps: 7.8
+  es_fps: 82.2
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Light rain started during the test but did not significantly impact results.
+  The weather was clear with a slight breeze from the east.

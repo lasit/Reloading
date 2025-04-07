@@ -1,0 +1,57 @@
+test_id: 2025-01-11__200m_308_Tikka-T3X_Sako_Hornady_ELD-M_75gr_ADI_2206H_24gr_2.412in_1.783in_RWS_4033
+date: '2025-01-11'
+distance_m: 200
+platform:
+  calibre: '308'
+  rifle: Tikka T3X
+  barrel_length_in: 21.1
+  twist_rate: '1:10'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-79
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-32
+  powder:
+    brand: ADI
+    model: 2206H
+    charge_gr: 24.0
+    lot: LOT-43
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-56
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 36
+  humidity_percent: 80
+  pressure_hpa: 1010
+  wind_speed_mps: 2
+  wind_dir_deg: 30
+  weather: Clear
+group:
+  group_es_mm: 186.8
+  group_es_moa: 1.52
+  group_es_x_mm: 128.9
+  group_es_y_mm: 102.3
+  mean_radius_mm: 46.0
+  poi_x_mm: 160.8
+  poi_y_mm: 122.9
+  shots: 16
+chrono:
+  avg_velocity_fps: 1726.6
+  sd_fps: 5.4
+  es_fps: 50.2
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Cool morning with stable air and good visibility. Cool morning with stable
+  air and good visibility.

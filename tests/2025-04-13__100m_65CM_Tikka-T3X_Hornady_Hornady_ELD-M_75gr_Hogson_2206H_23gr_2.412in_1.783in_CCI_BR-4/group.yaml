@@ -1,0 +1,57 @@
+test_id: 2025-04-13__100m_65CM_Tikka-T3X_Hornady_Hornady_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_CCI_BR-4
+date: '2025-04-13'
+distance_m: 100
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T3X
+  barrel_length_in: 27.9
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-94
+    neck_turned: 'Yes'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-36
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.3
+    lot: LOT-17
+  primer:
+    brand: CCI
+    model: BR-4
+    lot: LOT-95
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 36
+  humidity_percent: 80
+  pressure_hpa: 1009
+  wind_speed_mps: 6
+  wind_dir_deg: 90
+  weather: Rain
+group:
+  group_es_mm: 48.0
+  group_es_moa: 1.09
+  group_es_x_mm: 44.3
+  group_es_y_mm: 139.8
+  mean_radius_mm: 15.3
+  poi_x_mm: 59.1
+  poi_y_mm: 142.5
+  shots: 8
+chrono:
+  avg_velocity_fps: 1819.2
+  sd_fps: 23.6
+  es_fps: 82.2
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Hot and humid conditions with mirage affecting sight picture. Cool morning
+  with stable air and good visibility.

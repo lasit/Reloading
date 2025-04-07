@@ -1,0 +1,57 @@
+test_id: 2025-12-11__500m_223_Tikka-T1X_Lapua_Berger_ELD-M_75gr_Hogson_2208_23gr_2.412in_1.783in_RWS_BR-4
+date: '2025-12-11'
+distance_m: 500
+platform:
+  calibre: '223'
+  rifle: Tikka T1X
+  barrel_length_in: 22.2
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-40
+    neck_turned: 'No'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-41
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 23.8
+    lot: LOT-1
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-86
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 40
+  pressure_hpa: 1008
+  wind_speed_mps: 6
+  wind_dir_deg: 90
+  weather: Overcast
+group:
+  group_es_mm: 181.2
+  group_es_moa: 0.35
+  group_es_x_mm: 80.7
+  group_es_y_mm: 66.7
+  mean_radius_mm: 27.4
+  poi_x_mm: 177.5
+  poi_y_mm: 33.8
+  shots: 10
+chrono:
+  avg_velocity_fps: 1879.0
+  sd_fps: 8.9
+  es_fps: 16.1
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Overcast conditions with occasional gusts of wind. Overcast conditions with
+  occasional gusts of wind.

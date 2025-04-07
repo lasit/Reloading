@@ -1,0 +1,57 @@
+test_id: 2025-08-25__700m_30-06_Tikka-T3X_Hornady_Berger_ELD-M_75gr_ADI_2206H_24gr_2.412in_1.783in_RWS_4033
+date: '2025-08-25'
+distance_m: 700
+platform:
+  calibre: 30-06
+  rifle: Tikka T3X
+  barrel_length_in: 19.5
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-19
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-37
+  powder:
+    brand: ADI
+    model: 2206H
+    charge_gr: 24.0
+    lot: LOT-20
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-63
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 36
+  humidity_percent: 60
+  pressure_hpa: 1009
+  wind_speed_mps: 2
+  wind_dir_deg: 60
+  weather: Variable
+group:
+  group_es_mm: 52.6
+  group_es_moa: 1.29
+  group_es_x_mm: 169.3
+  group_es_y_mm: 49.9
+  mean_radius_mm: 49.8
+  poi_x_mm: 158.5
+  poi_y_mm: 35.7
+  shots: 14
+chrono:
+  avg_velocity_fps: 1617.8
+  sd_fps: 17.1
+  es_fps: 28.5
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: High humidity made for challenging shooting conditions. High humidity made
+  for challenging shooting conditions.

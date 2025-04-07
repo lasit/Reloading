@@ -1,0 +1,57 @@
+test_id: 2025-01-19__400m_65CM_Tikka-T1X_Lapua_Berger_ELD-M_75gr_ADI_2208_23gr_2.412in_1.783in_CCI_BR-4
+date: '2025-01-19'
+distance_m: 400
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T1X
+  barrel_length_in: 22.9
+  twist_rate: '1:10'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-4
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-27
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 23.6
+    lot: LOT-36
+  primer:
+    brand: CCI
+    model: BR-4
+    lot: LOT-44
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 60
+  pressure_hpa: 1010
+  wind_speed_mps: 0
+  wind_dir_deg: 30
+  weather: Clear
+group:
+  group_es_mm: 42.3
+  group_es_moa: 0.99
+  group_es_x_mm: 146.9
+  group_es_y_mm: 33.2
+  mean_radius_mm: 41.0
+  poi_x_mm: 178.7
+  poi_y_mm: 161.4
+  shots: 16
+chrono:
+  avg_velocity_fps: 1729.3
+  sd_fps: 22.3
+  es_fps: 91.1
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Hot and humid conditions with mirage affecting sight picture. Overcast conditions
+  with occasional gusts of wind.

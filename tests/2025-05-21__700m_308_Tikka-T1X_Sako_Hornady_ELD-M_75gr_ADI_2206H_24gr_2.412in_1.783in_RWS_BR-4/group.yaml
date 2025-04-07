@@ -1,0 +1,57 @@
+test_id: 2025-05-21__700m_308_Tikka-T1X_Sako_Hornady_ELD-M_75gr_ADI_2206H_24gr_2.412in_1.783in_RWS_BR-4
+date: '2025-05-21'
+distance_m: 700
+platform:
+  calibre: '308'
+  rifle: Tikka T1X
+  barrel_length_in: 27.6
+  twist_rate: '1:8'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-72
+    neck_turned: 'No'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-14
+  powder:
+    brand: ADI
+    model: 2206H
+    charge_gr: 24.1
+    lot: LOT-38
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-88
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 60
+  pressure_hpa: 1008
+  wind_speed_mps: 4
+  wind_dir_deg: 90
+  weather: Clear
+group:
+  group_es_mm: 73.0
+  group_es_moa: 1.46
+  group_es_x_mm: 100.3
+  group_es_y_mm: 28.6
+  mean_radius_mm: 28.6
+  poi_x_mm: 194.3
+  poi_y_mm: 99.0
+  shots: 8
+chrono:
+  avg_velocity_fps: 1850.6
+  sd_fps: 6.9
+  es_fps: 42.2
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Excellent visibility with stable atmospheric conditions. Hot and humid conditions
+  with mirage affecting sight picture.

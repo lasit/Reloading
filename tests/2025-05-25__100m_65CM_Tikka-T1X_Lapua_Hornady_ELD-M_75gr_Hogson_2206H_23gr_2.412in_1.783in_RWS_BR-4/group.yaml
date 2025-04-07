@@ -1,0 +1,57 @@
+test_id: 2025-05-25__100m_65CM_Tikka-T1X_Lapua_Hornady_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_RWS_BR-4
+date: '2025-05-25'
+distance_m: 100
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T1X
+  barrel_length_in: 27.7
+  twist_rate: '1:8'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-62
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-8
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.3
+    lot: LOT-55
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-74
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 40
+  pressure_hpa: 1010
+  wind_speed_mps: 0
+  wind_dir_deg: 90
+  weather: Clear
+group:
+  group_es_mm: 31.0
+  group_es_moa: 0.69
+  group_es_x_mm: 35.3
+  group_es_y_mm: 19.8
+  mean_radius_mm: 19.2
+  poi_x_mm: 111.5
+  poi_y_mm: 86.8
+  shots: 10
+chrono:
+  avg_velocity_fps: 1721.8
+  sd_fps: 13.7
+  es_fps: 58.4
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Changing wind directions throughout the test session. Hot and humid conditions
+  with mirage affecting sight picture.

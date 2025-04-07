@@ -1,0 +1,57 @@
+test_id: 2025-01-27__700m_223_Tikka-T3X_Lapua_Berger_ELD-M_75gr_ADI_2208_24gr_2.412in_1.783in_CCI_4033
+date: '2025-01-27'
+distance_m: 700
+platform:
+  calibre: '223'
+  rifle: Tikka T3X
+  barrel_length_in: 25.3
+  twist_rate: '1:8'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-14
+    neck_turned: 'Yes'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-100
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 24.0
+    lot: LOT-13
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-3
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 36
+  humidity_percent: 80
+  pressure_hpa: 1009
+  wind_speed_mps: 0
+  wind_dir_deg: 60
+  weather: Rain
+group:
+  group_es_mm: 22.6
+  group_es_moa: 1.24
+  group_es_x_mm: 84.3
+  group_es_y_mm: 119.8
+  mean_radius_mm: 19.0
+  poi_x_mm: 154.0
+  poi_y_mm: 182.7
+  shots: 12
+chrono:
+  avg_velocity_fps: 1804.3
+  sd_fps: 27.9
+  es_fps: 31.4
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: The weather was clear with a slight breeze from the east. Light rain started
+  during the test but did not significantly impact results.

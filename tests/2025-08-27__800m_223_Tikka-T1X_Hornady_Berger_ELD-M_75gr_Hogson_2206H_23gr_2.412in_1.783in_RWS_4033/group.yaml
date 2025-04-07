@@ -1,0 +1,57 @@
+test_id: 2025-08-27__800m_223_Tikka-T1X_Hornady_Berger_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_RWS_4033
+date: '2025-08-27'
+distance_m: 800
+platform:
+  calibre: '223'
+  rifle: Tikka T1X
+  barrel_length_in: 27.1
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-70
+    neck_turned: 'Yes'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-37
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.6
+    lot: LOT-18
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-43
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 40
+  pressure_hpa: 1010
+  wind_speed_mps: 0
+  wind_dir_deg: 30
+  weather: Fog
+group:
+  group_es_mm: 31.5
+  group_es_moa: 1.15
+  group_es_x_mm: 190.5
+  group_es_y_mm: 186.8
+  mean_radius_mm: 17.2
+  poi_x_mm: 161.6
+  poi_y_mm: 141.0
+  shots: 10
+chrono:
+  avg_velocity_fps: 1760.7
+  sd_fps: 14.8
+  es_fps: 97.4
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Perfect shooting conditions with clear skies and minimal wind. Perfect shooting
+  conditions with clear skies and minimal wind.

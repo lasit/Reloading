@@ -1,0 +1,57 @@
+test_id: 2025-06-21__300m_308_Tikka-T3X_Lapua_Hornady_ELD-M_75gr_Hogson_2208_24gr_2.412in_1.783in_CCI_4033
+date: '2025-06-21'
+distance_m: 300
+platform:
+  calibre: '308'
+  rifle: Tikka T3X
+  barrel_length_in: 23.9
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-2
+    neck_turned: 'Yes'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-32
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 24.1
+    lot: LOT-62
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-79
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 40
+  pressure_hpa: 1009
+  wind_speed_mps: 2
+  wind_dir_deg: 90
+  weather: Variable
+group:
+  group_es_mm: 70.3
+  group_es_moa: 1.22
+  group_es_x_mm: 166.8
+  group_es_y_mm: 24.0
+  mean_radius_mm: 34.4
+  poi_x_mm: 108.6
+  poi_y_mm: 15.3
+  shots: 10
+chrono:
+  avg_velocity_fps: 1785.3
+  sd_fps: 21.5
+  es_fps: 93.9
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: High humidity made for challenging shooting conditions. High humidity made
+  for challenging shooting conditions.

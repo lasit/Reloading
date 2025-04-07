@@ -1,0 +1,57 @@
+test_id: 2025-04-05__500m_65CM_Tikka-T3X_Hornady_Hornady_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_RWS_4033
+date: '2025-04-05'
+distance_m: 500
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T3X
+  barrel_length_in: 21.4
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-28
+    neck_turned: 'No'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-56
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.2
+    lot: LOT-100
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-74
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 40
+  pressure_hpa: 1008
+  wind_speed_mps: 2
+  wind_dir_deg: 0
+  weather: Overcast
+group:
+  group_es_mm: 145.5
+  group_es_moa: 0.81
+  group_es_x_mm: 15.4
+  group_es_y_mm: 73.0
+  mean_radius_mm: 47.3
+  poi_x_mm: 141.7
+  poi_y_mm: 71.2
+  shots: 14
+chrono:
+  avg_velocity_fps: 1606.4
+  sd_fps: 27.3
+  es_fps: 18.3
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Light rain started during the test but did not significantly impact results.
+  Light rain started during the test but did not significantly impact results.

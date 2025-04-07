@@ -1,0 +1,57 @@
+test_id: 2025-01-24__400m_65CM_Tikka-T3X_Lapua_Berger_ELD-M_75gr_Hogson_2206H_23gr_2.412in_1.783in_CCI_4033
+date: '2025-01-24'
+distance_m: 400
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T3X
+  barrel_length_in: 27.8
+  twist_rate: '1:10'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-71
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-4
+  powder:
+    brand: Hogson
+    model: 2206H
+    charge_gr: 23.8
+    lot: LOT-59
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-14
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 30
+  humidity_percent: 80
+  pressure_hpa: 1009
+  wind_speed_mps: 0
+  wind_dir_deg: 0
+  weather: Fog
+group:
+  group_es_mm: 192.2
+  group_es_moa: 1.26
+  group_es_x_mm: 12.8
+  group_es_y_mm: 178.2
+  mean_radius_mm: 39.7
+  poi_x_mm: 92.5
+  poi_y_mm: 29.3
+  shots: 16
+chrono:
+  avg_velocity_fps: 1663.0
+  sd_fps: 15.8
+  es_fps: 64.4
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Strong winds from the north affected shot placement. Changing wind directions
+  throughout the test session.

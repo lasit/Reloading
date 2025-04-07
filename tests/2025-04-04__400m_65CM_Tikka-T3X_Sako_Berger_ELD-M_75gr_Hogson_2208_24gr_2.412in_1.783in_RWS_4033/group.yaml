@@ -1,0 +1,57 @@
+test_id: 2025-04-04__400m_65CM_Tikka-T3X_Sako_Berger_ELD-M_75gr_Hogson_2208_24gr_2.412in_1.783in_RWS_4033
+date: '2025-04-04'
+distance_m: 400
+platform:
+  calibre: 6.5CM
+  rifle: Tikka T3X
+  barrel_length_in: 25.8
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-91
+    neck_turned: 'Yes'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-38
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 24.1
+    lot: LOT-3
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: LOT-5
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 40
+  pressure_hpa: 1008
+  wind_speed_mps: 6
+  wind_dir_deg: 90
+  weather: Rain
+group:
+  group_es_mm: 126.0
+  group_es_moa: 0.23
+  group_es_x_mm: 181.8
+  group_es_y_mm: 42.7
+  mean_radius_mm: 43.4
+  poi_x_mm: 55.5
+  poi_y_mm: 68.2
+  shots: 16
+chrono:
+  avg_velocity_fps: 1851.5
+  sd_fps: 15.8
+  es_fps: 41.5
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: High humidity made for challenging shooting conditions. Hot and humid conditions
+  with mirage affecting sight picture.

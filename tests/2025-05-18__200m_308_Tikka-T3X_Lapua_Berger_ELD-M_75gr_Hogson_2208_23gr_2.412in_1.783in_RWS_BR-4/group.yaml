@@ -1,0 +1,57 @@
+test_id: 2025-05-18__200m_308_Tikka-T3X_Lapua_Berger_ELD-M_75gr_Hogson_2208_23gr_2.412in_1.783in_RWS_BR-4
+date: '2025-05-18'
+distance_m: 200
+platform:
+  calibre: '308'
+  rifle: Tikka T3X
+  barrel_length_in: 26.0
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-39
+    neck_turned: 'No'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-49
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 23.8
+    lot: LOT-61
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-41
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 32
+  humidity_percent: 80
+  pressure_hpa: 1008
+  wind_speed_mps: 4
+  wind_dir_deg: 60
+  weather: Clear
+group:
+  group_es_mm: 85.2
+  group_es_moa: 0.47
+  group_es_x_mm: 143.2
+  group_es_y_mm: 105.2
+  mean_radius_mm: 10.1
+  poi_x_mm: 121.2
+  poi_y_mm: 39.0
+  shots: 14
+chrono:
+  avg_velocity_fps: 1651.1
+  sd_fps: 11.7
+  es_fps: 62.4
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: The weather was clear with a slight breeze from the east. Changing wind directions
+  throughout the test session.

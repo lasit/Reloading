@@ -1,0 +1,57 @@
+test_id: 2025-12-01__800m_223_Tikka-T1X_Lapua_Hornady_ELD-M_75gr_ADI_2206H_23gr_2.412in_1.783in_CCI_4033
+date: '2025-12-01'
+distance_m: 800
+platform:
+  calibre: '223'
+  rifle: Tikka T1X
+  barrel_length_in: 18.4
+  twist_rate: '1:12'
+ammo:
+  case:
+    brand: Lapua
+    lot: LOT-65
+    neck_turned: 'No'
+    brass_sizing: Full
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-29
+  powder:
+    brand: ADI
+    model: 2206H
+    charge_gr: 23.2
+    lot: LOT-18
+  primer:
+    brand: CCI
+    model: '4033'
+    lot: LOT-28
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 34
+  humidity_percent: 40
+  pressure_hpa: 1010
+  wind_speed_mps: 6
+  wind_dir_deg: 0
+  weather: Rain
+group:
+  group_es_mm: 74.4
+  group_es_moa: 1.01
+  group_es_x_mm: 185.5
+  group_es_y_mm: 106.9
+  mean_radius_mm: 33.5
+  poi_x_mm: 140.2
+  poi_y_mm: 193.5
+  shots: 14
+chrono:
+  avg_velocity_fps: 1781.1
+  sd_fps: 8.5
+  es_fps: 98.3
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Cool morning with stable air and good visibility. The weather was clear with
+  a slight breeze from the east.

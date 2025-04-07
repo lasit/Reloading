@@ -1,0 +1,57 @@
+test_id: 2025-12-02__700m_223_Tikka-T3X_Sako_Hornady_ELD-M_75gr_ADI_2208_23gr_2.412in_1.783in_RWS_BR-4
+date: '2025-12-02'
+distance_m: 700
+platform:
+  calibre: '223'
+  rifle: Tikka T3X
+  barrel_length_in: 25.4
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Sako
+    lot: LOT-58
+    neck_turned: 'No'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-31
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 23.6
+    lot: LOT-45
+  primer:
+    brand: RWS
+    model: BR-4
+    lot: LOT-86
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 30
+  humidity_percent: 40
+  pressure_hpa: 1010
+  wind_speed_mps: 4
+  wind_dir_deg: 60
+  weather: Clear
+group:
+  group_es_mm: 191.1
+  group_es_moa: 1.59
+  group_es_x_mm: 163.1
+  group_es_y_mm: 120.2
+  mean_radius_mm: 19.5
+  poi_x_mm: 194.8
+  poi_y_mm: 193.0
+  shots: 8
+chrono:
+  avg_velocity_fps: 1683.4
+  sd_fps: 9.9
+  es_fps: 67.0
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Strong winds from the north affected shot placement. High humidity made for
+  challenging shooting conditions.

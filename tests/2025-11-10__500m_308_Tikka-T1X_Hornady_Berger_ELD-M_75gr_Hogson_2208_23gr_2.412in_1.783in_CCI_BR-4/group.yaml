@@ -1,0 +1,57 @@
+test_id: 2025-11-10__500m_308_Tikka-T1X_Hornady_Berger_ELD-M_75gr_Hogson_2208_23gr_2.412in_1.783in_CCI_BR-4
+date: '2025-11-10'
+distance_m: 500
+platform:
+  calibre: '308'
+  rifle: Tikka T1X
+  barrel_length_in: 19.1
+  twist_rate: '1:14'
+ammo:
+  case:
+    brand: Hornady
+    lot: LOT-80
+    neck_turned: 'No'
+    brass_sizing: Neck Only - no bushing
+    bushing_size: 0.245
+    shoulder_bump: 1.5
+  bullet:
+    brand: Berger
+    model: ELD-M
+    weight_gr: 75
+    lot: LOT-65
+  powder:
+    brand: Hogson
+    model: '2208'
+    charge_gr: 23.3
+    lot: LOT-42
+  primer:
+    brand: CCI
+    model: BR-4
+    lot: LOT-3
+  coal_in: 2.412
+  b2o_in: 1.783
+environment:
+  temperature_c: 30
+  humidity_percent: 60
+  pressure_hpa: 1010
+  wind_speed_mps: 0
+  wind_dir_deg: 30
+  weather: Clear
+group:
+  group_es_mm: 117.6
+  group_es_moa: 0.33
+  group_es_x_mm: 87.8
+  group_es_y_mm: 190.4
+  mean_radius_mm: 16.0
+  poi_x_mm: 100.9
+  poi_y_mm: 56.4
+  shots: 14
+chrono:
+  avg_velocity_fps: 1632.5
+  sd_fps: 21.3
+  es_fps: 40.6
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: Overcast conditions with occasional gusts of wind. Strong winds from the north
+  affected shot placement.
