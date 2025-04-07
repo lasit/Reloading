@@ -724,18 +724,6 @@ def main():
                 else:
                     test_data["ammo"]["case"]["brand"] = selected_case_brand
                 
-                # Neck Turned (Yes/No)
-                # Handle case when neck_turned doesn't exist in test_data
-                if "neck_turned" not in test_data["ammo"]["case"]:
-                    test_data["ammo"]["case"]["neck_turned"] = "No"
-                
-                test_data["ammo"]["case"]["neck_turned"] = st.selectbox(
-                    "Neck Turned", 
-                    options=["Yes", "No"],
-                    index=0 if test_data["ammo"]["case"]["neck_turned"] == "Yes" else 1,
-                    key="neck_turned"
-                )
-                
                 # Brass Sizing dropdown
                 # Handle case when brass_sizing doesn't exist in test_data
                 if "brass_sizing" not in test_data["ammo"]["case"]:
@@ -750,6 +738,20 @@ def main():
                     options=brass_sizing_options,
                     index=brass_sizing_options.index(test_data["ammo"]["case"]["brass_sizing"]) if test_data["ammo"]["case"]["brass_sizing"] in brass_sizing_options else 0,
                     key="brass_sizing"
+                )
+                
+                # Shoulder Bump (float, 2 decimals, thousands of an inch)
+                # Handle case when shoulder_bump doesn't exist in test_data
+                if "shoulder_bump" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["shoulder_bump"] = 0.0
+                
+                test_data["ammo"]["case"]["shoulder_bump"] = st.number_input(
+                    "Shoulder Bump (thousandths of an inch)", 
+                    min_value=0.0, 
+                    value=float(test_data["ammo"]["case"]["shoulder_bump"]),
+                    step=0.01,
+                    format="%.2f",
+                    key="shoulder_bump"
                 )
             with col2:
                 test_data["ammo"]["case"]["lot"] = st.text_input(
@@ -773,18 +775,16 @@ def main():
                     key="bushing_size"
                 )
                 
-                # Shoulder Bump (float, 2 decimals, thousands of an inch)
-                # Handle case when shoulder_bump doesn't exist in test_data
-                if "shoulder_bump" not in test_data["ammo"]["case"]:
-                    test_data["ammo"]["case"]["shoulder_bump"] = 0.0
+                # Neck Turned (Yes/No)
+                # Handle case when neck_turned doesn't exist in test_data
+                if "neck_turned" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["neck_turned"] = "No"
                 
-                test_data["ammo"]["case"]["shoulder_bump"] = st.number_input(
-                    "Shoulder Bump (thousandths of an inch)", 
-                    min_value=0.0, 
-                    value=float(test_data["ammo"]["case"]["shoulder_bump"]),
-                    step=0.01,
-                    format="%.2f",
-                    key="shoulder_bump"
+                test_data["ammo"]["case"]["neck_turned"] = st.selectbox(
+                    "Neck Turned", 
+                    options=["Yes", "No"],
+                    index=0 if test_data["ammo"]["case"]["neck_turned"] == "Yes" else 1,
+                    key="neck_turned"
                 )
             
             # Bullet
@@ -833,18 +833,19 @@ def main():
                 else:
                     test_data["ammo"]["bullet"]["model"] = selected_bullet_model
             with col2:
+                test_data["ammo"]["bullet"]["lot"] = st.text_input(
+                    "Lot", 
+                    value=test_data["ammo"]["bullet"]["lot"],
+                    key="bullet_lot", 
+                    placeholder="e.g. HD2204A"
+                )
+                
                 test_data["ammo"]["bullet"]["weight_gr"] = st.number_input(
                     "Weight (gr)", 
                     min_value=0.0, 
                     value=float(test_data["ammo"]["bullet"]["weight_gr"]),
                     key="bullet_weight", 
                     step=0.1
-                )
-                test_data["ammo"]["bullet"]["lot"] = st.text_input(
-                    "Lot", 
-                    value=test_data["ammo"]["bullet"]["lot"],
-                    key="bullet_lot", 
-                    placeholder="e.g. HD2204A"
                 )
             
             # Powder
@@ -893,18 +894,19 @@ def main():
                 else:
                     test_data["ammo"]["powder"]["model"] = selected_powder_model
             with col2:
+                test_data["ammo"]["powder"]["lot"] = st.text_input(
+                    "Lot", 
+                    value=test_data["ammo"]["powder"]["lot"],
+                    key="powder_lot", 
+                    placeholder="e.g. ADI-2208-03"
+                )
+                
                 test_data["ammo"]["powder"]["charge_gr"] = st.number_input(
                     "Charge (gr)", 
                     min_value=0.0, 
                     value=float(test_data["ammo"]["powder"]["charge_gr"]),
                     key="powder_charge", 
                     step=0.1
-                )
-                test_data["ammo"]["powder"]["lot"] = st.text_input(
-                    "Lot", 
-                    value=test_data["ammo"]["powder"]["lot"],
-                    key="powder_lot", 
-                    placeholder="e.g. ADI-2208-03"
                 )
             
             # Primer
@@ -960,24 +962,27 @@ def main():
                     placeholder="e.g. CCI-BR4-B1"
                 )
             
-            # COAL
+            # Cartridge Measurements
             st.subheader("Cartridge Measurements")
-            test_data["ammo"]["coal_in"] = st.number_input(
-                "Cartridge Overall Length - COAL (inches)", 
-                min_value=0.0, 
-                value=float(test_data["ammo"]["coal_in"]),
-                step=0.001
-            )
             # Ensure b2o_in exists in test_data
             if "b2o_in" not in test_data["ammo"]:
                 test_data["ammo"]["b2o_in"] = 0.0
-                
-            test_data["ammo"]["b2o_in"] = st.number_input(
-                "Cartridge Base to Ogive - B2O (inches)",
-                min_value=0.0,
-                value=float(test_data["ammo"]["b2o_in"]),
-                step=0.001
-            )
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                test_data["ammo"]["coal_in"] = st.number_input(
+                    "Cartridge Overall Length - COAL (inches)", 
+                    min_value=0.0, 
+                    value=float(test_data["ammo"]["coal_in"]),
+                    step=0.001
+                )
+            with col2:
+                test_data["ammo"]["b2o_in"] = st.number_input(
+                    "Cartridge Base to Ogive - B2O (inches)",
+                    min_value=0.0,
+                    value=float(test_data["ammo"]["b2o_in"]),
+                    step=0.001
+                )
         
         # Tab 4: Environment
         with tab4:
