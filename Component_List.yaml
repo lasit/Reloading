@@ -1,35 +1,32 @@
-# Component lists for dropdown menus
 calibre:
-  - "223"
-  - "308"
-  - "6.5CM"
-
+- '223'
+- '308'
+- 6.5CM
+- 30-06
 rifle:
-  - "Tikka T3X"
-
+- Tikka T3X
+- Tikka T1X
 case_brand:
-  - "Hornady"
-  - "Sako"
-  - "Lapua"
-
+- Hornady
+- Sako
+- Lapua
 powder_brand:
-  - "ADI"
-
+- ADI
+- Hogson
 powder_model:
-  - "2208"
-  - "2206H"
-
+- '2208'
+- 2206H
 bullet_brand:
-  - "Hornady"
-  - "Berger"
-
+- Hornady
+- Berger
 bullet_model:
-  - "ELD-M"
-
+- ELD-M
 primer_brand:
-  - "CCI"
-  - "RWS"
-
+- CCI
+- RWS
 primer_model:
-  - "BR-4"
-  - "4033"
+- BR-4
+- '4033'
+brass_sizing:
+- Full
+- Neck Only with Bushing

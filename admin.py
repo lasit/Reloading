@@ -25,7 +25,8 @@ def main():
         "Bullet Brand", 
         "Bullet Model", 
         "Primer Brand", 
-        "Primer Model"
+        "Primer Model",
+        "Brass Sizing"
     ])
     
     # Map tab indices to component list keys and names
@@ -38,7 +39,8 @@ def main():
         {"key": "bullet_brand", "name": "Bullet Brand"},
         {"key": "bullet_model", "name": "Bullet Model"},
         {"key": "primer_brand", "name": "Primer Brand"},
-        {"key": "primer_model", "name": "Primer Model"}
+        {"key": "primer_model", "name": "Primer Model"},
+        {"key": "brass_sizing", "name": "Brass Sizing"}
     ]
     
     # Display and edit each component list

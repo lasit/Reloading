@@ -30,7 +30,11 @@ def create_empty_test_data() -> Dict[str, Any]:
         "ammo": {
             "case": {
                 "brand": "",
-                "lot": ""
+                "lot": "",
+                "neck_turned": "No",
+                "brass_sizing": "Full",
+                "bushing_size": 0.0,
+                "shoulder_bump": 0.0
             },
             "bullet": {
                 "brand": "",
@@ -704,12 +708,68 @@ def main():
                     )
                 else:
                     test_data["ammo"]["case"]["brand"] = selected_case_brand
+                
+                # Neck Turned (Yes/No)
+                # Handle case when neck_turned doesn't exist in test_data
+                if "neck_turned" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["neck_turned"] = "No"
+                
+                test_data["ammo"]["case"]["neck_turned"] = st.selectbox(
+                    "Neck Turned", 
+                    options=["Yes", "No"],
+                    index=0 if test_data["ammo"]["case"]["neck_turned"] == "Yes" else 1,
+                    key="neck_turned"
+                )
+                
+                # Brass Sizing dropdown
+                # Handle case when brass_sizing doesn't exist in test_data
+                if "brass_sizing" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["brass_sizing"] = "Full"
+                
+                brass_sizing_options = component_lists.get("brass_sizing", ["Full", "Neck Only with Bushing"])
+                if test_data["ammo"]["case"]["brass_sizing"] and test_data["ammo"]["case"]["brass_sizing"] not in brass_sizing_options:
+                    brass_sizing_options = [test_data["ammo"]["case"]["brass_sizing"]] + brass_sizing_options
+                
+                test_data["ammo"]["case"]["brass_sizing"] = st.selectbox(
+                    "Brass Sizing", 
+                    options=brass_sizing_options,
+                    index=brass_sizing_options.index(test_data["ammo"]["case"]["brass_sizing"]) if test_data["ammo"]["case"]["brass_sizing"] in brass_sizing_options else 0,
+                    key="brass_sizing"
+                )
             with col2:
                 test_data["ammo"]["case"]["lot"] = st.text_input(
                     "Lot", 
                     value=test_data["ammo"]["case"]["lot"],
                     key="case_lot", 
                     placeholder="e.g. SK-001"
+                )
+                
+                # Bushing Size (float, 3 decimals)
+                # Handle case when bushing_size doesn't exist in test_data
+                if "bushing_size" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["bushing_size"] = 0.0
+                
+                test_data["ammo"]["case"]["bushing_size"] = st.number_input(
+                    "Bushing Size (inches)", 
+                    min_value=0.0, 
+                    value=float(test_data["ammo"]["case"]["bushing_size"]),
+                    step=0.001,
+                    format="%.3f",
+                    key="bushing_size"
+                )
+                
+                # Shoulder Bump (float, 2 decimals, thousands of an inch)
+                # Handle case when shoulder_bump doesn't exist in test_data
+                if "shoulder_bump" not in test_data["ammo"]["case"]:
+                    test_data["ammo"]["case"]["shoulder_bump"] = 0.0
+                
+                test_data["ammo"]["case"]["shoulder_bump"] = st.number_input(
+                    "Shoulder Bump (thousandths of an inch)", 
+                    min_value=0.0, 
+                    value=float(test_data["ammo"]["case"]["shoulder_bump"]),
+                    step=0.01,
+                    format="%.2f",
+                    key="shoulder_bump"
                 )
             
             # Bullet
