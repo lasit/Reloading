@@ -79,10 +79,13 @@ Reloading/
 ## Future Enhancements
 - Add image preview for target photos
 - Implement CSV parsing for chronograph data
-- Add data visualization for group measurements
 - Add validation for input fields
 - Implement auto-calculation of more fields
-- Add more graph types to the Data Analysis page
+- Add more graph types to the Data Analysis page:
+  - Scatter plots comparing powder charge vs. velocity
+  - Scatter plots comparing powder charge vs. group size
+  - Bar charts for comparing different loads
+  - Heat maps for environmental factors vs. accuracy
 
 ## Development History
 - Created basic app structure with app.py editor.py and utils.py
@@ -106,3 +109,7 @@ Reloading/
 - Created script to generate random test data for development and testing
 - Added Data Analysis page with filtering capabilities for all test parameters
 - Implemented test comparison functionality with tabular data display
+- Added data visualization with interactive charts:
+  - Group Size and Mean Radius over time chart
+  - Velocity metrics (Average, ES, SD) over time chart
+  - Tabbed interface for different chart types
