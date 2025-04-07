@@ -86,6 +86,85 @@ Reloading/
   - Scatter plots comparing powder charge vs. group size
   - Bar charts for comparing different loads
   - Heat maps for environmental factors vs. accuracy
+  - Additional multi-axis visualizations for complex data relationships
+# Precision Rifle Load Development App
+
+## Project Overview
+This Streamlit application manages precision rifle load development test data. It allows users to browse test folders, load and edit YAML files, display them in a structured form, and save changes back. The application includes dropdown lists for common components and an admin interface for managing these lists.
+
+## Project Structure
+```
+Reloading/
+├── app.py              ← main Streamlit app
+├── admin.py            ← component list admin interface
+├── editor.py           ← form components
+├── utils.py            ← YAML load/save functions
+├── Component_List.yaml ← dropdown list data
+├── requirements.txt    ← dependencies
+├── README.md           ← project documentation
+└── tests/              ← test data folders
+    └── [test-folders]/ ← individual test folders
+        ├── group.yaml  ← test data in YAML format
+        ├── chrono.csv  ← chronograph data
+        ├── target.jpg  ← target image
+        └── notes.md    ← additional notes
+```
+
+## Features Implemented
+1. **Test Data Management**
+   - Browse existing tests via sidebar
+   - Search and filter tests by test ID
+   - Create new tests with auto-generated IDs
+   - Load and save YAML data with correct structure
+   - Parse test ID components automatically
+   - Form validation with required fields
+   - Immediate data saving after test ID generation
+
+2. **User Interface**
+   - Tabbed interface with intuitive icons
+   - Sidebar for test selection with search functionality
+   - Form validation and error handling
+   - Responsive layout with columns
+   - Dropdown lists for common components
+   - Custom value option for all dropdown lists
+
+3. **Data Processing**
+   - Automatic MOA calculation
+   - Test ID generation from components
+   - File existence checking
+   - Component list management
+
+4. **Admin Interface**
+   - Dedicated admin page for managing component lists
+   - Add, edit, and delete items in component lists
+   - Organized by component type in tabs
+
+## Technical Details
+- **Data Structure**: The app uses a consistent data structure for all test data, including:
+  - Test metadata (date, distance)
+  - Platform configuration (rifle, calibre)
+  - Ammunition configuration (bullet, powder, primer, case)
+  - Environmental conditions
+  - Group results
+  - Chronograph results
+  - File paths
+  - Notes
+
+- **Component Lists**: The app maintains lists of common components in Component_List.yaml:
+  - Calibre options
+  - Rifle options
+  - Case brand options
+  - Powder brand and model options
+  - Bullet brand and model options
+  - Primer brand and model options
+
+- **File Naming Convention**: Test folders follow this format:
+  `[Date]__[Distance]_[Calibre]_[Rifle]_[CaseBrand]_[BulletBrand]_[BulletModel]_[BulletWeight]_[PowderBrand]_[Powder]_[Charge]_[COAL]_[PrimerBrand]_[Primer]`
+
+- **Dependencies**:
+  - streamlit==1.32.0
+  - pyyaml==6.0.1
+
 
 ## Development History
 - Created basic app structure with app.py editor.py and utils.py
@@ -113,3 +192,10 @@ Reloading/
   - Group Size and Mean Radius over time chart
   - Velocity metrics (Average, ES, SD) over time chart
   - Tabbed interface for different chart types
+- Enhanced data visualization with a combined multi-axis chart showing all 5 metrics:
+  - Group Size (MOA)
+  - Mean Radius (mm)
+  - Average Velocity (fps)
+  - Extreme Spread (ES)
+  - Standard Deviation (SD)
+- Reorganized visualization interface with separate and combined chart views

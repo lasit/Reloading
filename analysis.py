@@ -368,10 +368,11 @@ def main():
             plot_df = filtered_df.sort_values('date_obj')
             
             # Create tabs for different charts
-            chart_tabs = st.tabs(["Accuracy Metrics", "Velocity Metrics"])
+            chart_tabs = st.tabs(["Separate Charts", "Combined Chart"])
             
-            # Tab 1: Group Size and Mean Radius Over Time
+            # Tab 1: Separate Charts for Accuracy and Velocity
             with chart_tabs[0]:
+                # Accuracy Metrics Chart
                 st.subheader("Group Size and Mean Radius Over Time")
                 
                 # Create the plot
@@ -415,9 +416,8 @@ def main():
                 This chart shows how your group sizes have changed over time for the filtered test data. 
                 Look for downward trends which indicate improving accuracy.
                 """)
-            
-            # Tab 2: Velocity Metrics Over Time
-            with chart_tabs[1]:
+                
+                # Velocity Metrics Chart
                 st.subheader("Velocity Metrics Over Time")
                 
                 # Create the plot
@@ -462,6 +462,94 @@ def main():
                 
                 This chart shows how your velocity metrics have changed over time for the filtered test data.
                 Look for consistent velocity (flat green line) and low variation (low orange and purple lines).
+                """)
+            
+            # Tab 2: Combined Chart with All Metrics
+            with chart_tabs[1]:
+                st.subheader("All Metrics Combined")
+                
+                # Create figure with 5 y-axes
+                fig3, ax5 = plt.subplots(figsize=(14, 8))
+                
+                # Define colors for each metric
+                colors = {
+                    'group_es_moa': 'tab:blue',
+                    'mean_radius_mm': 'tab:red',
+                    'avg_velocity_fps': 'tab:green',
+                    'es_fps': 'tab:orange',
+                    'sd_fps': 'tab:purple'
+                }
+                
+                # First axis - Group Size (MOA)
+                ax5.set_xlabel('Date')
+                ax5.set_ylabel('Group Size (MOA)', color=colors['group_es_moa'])
+                ax5.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=colors['group_es_moa'], label='Group Size (MOA)')
+                ax5.tick_params(axis='y', labelcolor=colors['group_es_moa'])
+                
+                # Create additional axes
+                ax6 = ax5.twinx()  # Mean Radius
+                ax7 = ax5.twinx()  # Average Velocity
+                ax8 = ax5.twinx()  # ES
+                ax9 = ax5.twinx()  # SD
+                
+                # Offset the right axes to prevent overlap
+                offset = 60
+                ax7.spines['right'].set_position(('outward', offset))
+                ax8.spines['right'].set_position(('outward', offset * 2))
+                ax9.spines['right'].set_position(('outward', offset * 3))
+                
+                # Mean Radius (mm)
+                ax6.set_ylabel('Mean Radius (mm)', color=colors['mean_radius_mm'])
+                ax6.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=colors['mean_radius_mm'], label='Mean Radius (mm)')
+                ax6.tick_params(axis='y', labelcolor=colors['mean_radius_mm'])
+                
+                # Average Velocity (fps)
+                ax7.set_ylabel('Avg Velocity (fps)', color=colors['avg_velocity_fps'])
+                ax7.plot(plot_df['date_obj'], plot_df['avg_velocity_fps'], 'o-', color=colors['avg_velocity_fps'], label='Avg Velocity (fps)')
+                ax7.tick_params(axis='y', labelcolor=colors['avg_velocity_fps'])
+                
+                # ES (fps)
+                ax8.set_ylabel('ES (fps)', color=colors['es_fps'])
+                ax8.plot(plot_df['date_obj'], plot_df['es_fps'], 'o-', color=colors['es_fps'], label='ES (fps)')
+                ax8.tick_params(axis='y', labelcolor=colors['es_fps'])
+                
+                # SD (fps)
+                ax9.set_ylabel('SD (fps)', color=colors['sd_fps'])
+                ax9.plot(plot_df['date_obj'], plot_df['sd_fps'], 'o-', color=colors['sd_fps'], label='SD (fps)')
+                ax9.tick_params(axis='y', labelcolor=colors['sd_fps'])
+                
+                # Rotate x-axis labels for better readability
+                plt.xticks(rotation=45)
+                
+                # Add a title and adjust layout
+                plt.title('All Metrics Combined')
+                fig3.tight_layout()
+                
+                # Create a combined legend
+                lines = []
+                labels = []
+                for ax in [ax5, ax6, ax7, ax8, ax9]:
+                    lns, lbs = ax.get_legend_handles_labels()
+                    lines.extend(lns)
+                    labels.extend(lbs)
+                
+                # Place legend at the top of the chart
+                ax5.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=5)
+                
+                # Display the plot
+                st.pyplot(fig3)
+                
+                # Add explanation
+                st.markdown("""
+                **Chart Explanation:**
+                - **Blue Line**: Group Size in Minutes of Angle (MOA) - smaller is better
+                - **Red Line**: Mean Radius in millimeters (mm) - smaller is better
+                - **Green Line**: Average Velocity in feet per second (fps)
+                - **Orange Line**: Extreme Spread (ES) in fps - smaller is better
+                - **Purple Line**: Standard Deviation (SD) in fps - smaller is better
+                
+                This combined chart shows all metrics together to help identify correlations between accuracy and velocity.
+                For example, you might notice that lower velocity variation (ES and SD) often correlates with better group sizes.
                 """)
         else:
             st.info("At least two data points are needed to create meaningful graphs. Adjust your filters to include more tests.")
