@@ -80,9 +80,9 @@ Reloading/
 - Add image preview for target photos
 - Implement CSV parsing for chronograph data
 - Add data visualization for group measurements
-- Create a comparison view for multiple tests
 - Add validation for input fields
 - Implement auto-calculation of more fields
+- Add more graph types to the Data Analysis page
 
 ## Development History
 - Created basic app structure with app.py editor.py and utils.py
@@ -104,3 +104,5 @@ Reloading/
 - Updated test selection to show full test ID including date
 - Added sorting of test list by date and then by distance
 - Created script to generate random test data for development and testing
+- Added Data Analysis page with filtering capabilities for all test parameters
+- Implemented test comparison functionality with tabular data display
