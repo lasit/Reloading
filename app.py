@@ -316,11 +316,31 @@ def main():
         # Add search box for filtering tests
         search_query = st.text_input("Search Tests", key="search_tests", placeholder="Filter by test ID...")
         
+        # Sort test folders by date and then by distance
+        def sort_key(folder):
+            parts = folder.split('__')
+            if len(parts) != 2:
+                return ("", 0)  # Default for invalid format
+            
+            date_part = parts[0]
+            
+            # Extract distance from the second part (e.g., "100m_...")
+            distance_part = parts[1].split('_')[0] if '_' in parts[1] else ""
+            try:
+                # Remove 'm' suffix if present and convert to integer
+                distance = int(distance_part.rstrip('m'))
+            except (ValueError, AttributeError):
+                distance = 0
+                
+            return (date_part, distance)
+        
+        sorted_test_folders = sorted(test_folders, key=sort_key)
+        
         # Filter test folders based on search query
         if search_query:
-            filtered_test_folders = [folder for folder in test_folders if search_query.lower() in folder.lower()]
+            filtered_test_folders = [folder for folder in sorted_test_folders if search_query.lower() in folder.lower()]
         else:
-            filtered_test_folders = test_folders
+            filtered_test_folders = sorted_test_folders
         
         # Option to create a new test
         new_test = st.checkbox("Create new test", key="new_test_checkbox")
