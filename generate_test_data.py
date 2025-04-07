@@ -22,7 +22,7 @@ def random_date_in_2025():
 def generate_random_test_data(component_lists):
     # Random values for test info
     date = random_date_in_2025()
-    distance_m = random.randint(100, 900)
+    distance_m = random.choice([100, 200, 300, 400, 500, 600, 700, 800, 900])
     
     # Random values for platform
     calibre = random.choice(component_lists['calibre'])
@@ -237,8 +237,8 @@ def generate_test_id(date: str, distance_m: int, calibre: str, rifle: str,
 def main():
     component_lists = load_component_lists()
     
-    # Create 50 random test data files
-    for i in range(50):
+    # Create 100 random test data files
+    for i in range(100):
         test_data = generate_random_test_data(component_lists)
         test_id = test_data["test_id"]
         
