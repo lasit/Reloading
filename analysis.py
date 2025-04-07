@@ -3,6 +3,7 @@ import os
 import yaml
 import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 import utils
 from utils import load_component_lists
 
@@ -356,9 +357,62 @@ def main():
         # Display the filtered tests
         st.dataframe(filtered_df[display_columns], use_container_width=True)
         
-        # Placeholder for future graphs
+        # Data Visualization
         st.header("Data Visualization")
-        st.info("Graphs will be added in future updates.")
+        
+        if len(filtered_df) > 1:
+            # Create a figure for the group size and mean radius over time
+            st.subheader("Group Size and Mean Radius Over Time")
+            
+            # Convert date strings to datetime objects for proper sorting
+            filtered_df['date_obj'] = pd.to_datetime(filtered_df['date'])
+            
+            # Sort by date
+            plot_df = filtered_df.sort_values('date_obj')
+            
+            # Create the plot
+            fig, ax1 = plt.subplots(figsize=(12, 6))
+            
+            # Plot group size (MOA) on the left y-axis
+            color = 'tab:blue'
+            ax1.set_xlabel('Date')
+            ax1.set_ylabel('Group Size (MOA)', color=color)
+            ax1.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=color, label='Group Size (MOA)')
+            ax1.tick_params(axis='y', labelcolor=color)
+            
+            # Create a second y-axis for mean radius
+            ax2 = ax1.twinx()
+            color = 'tab:red'
+            ax2.set_ylabel('Mean Radius (mm)', color=color)
+            ax2.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=color, label='Mean Radius (mm)')
+            ax2.tick_params(axis='y', labelcolor=color)
+            
+            # Rotate x-axis labels for better readability
+            plt.xticks(rotation=45)
+            
+            # Add a title and adjust layout
+            plt.title('Group Size and Mean Radius Over Time')
+            fig.tight_layout()
+            
+            # Add a legend
+            lines1, labels1 = ax1.get_legend_handles_labels()
+            lines2, labels2 = ax2.get_legend_handles_labels()
+            ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+            
+            # Display the plot
+            st.pyplot(fig)
+            
+            # Add explanation
+            st.markdown("""
+            **Chart Explanation:**
+            - **Blue Line (Left Axis)**: Group Size in Minutes of Angle (MOA) - smaller is better
+            - **Red Line (Right Axis)**: Mean Radius in millimeters (mm) - smaller is better
+            
+            This chart shows how your group sizes have changed over time for the filtered test data. 
+            Look for downward trends which indicate improving accuracy.
+            """)
+        else:
+            st.info("At least two data points are needed to create meaningful graphs. Adjust your filters to include more tests.")
     else:
         st.warning("No tests match the selected filters. Try adjusting your criteria.")
 
