@@ -85,7 +85,7 @@ Reloading/
 - Implement auto-calculation of more fields
 
 ## Development History
-- Created basic app structure with app.py, editor.py, and utils.py
+- Created basic app structure with app.py editor.py and utils.py
 - Implemented YAML loading and saving functionality
 - Created form UI with tabs and sections
 - Added test ID generation and parsing
@@ -98,3 +98,9 @@ Reloading/
 - Added admin.py for managing component lists
 - Fixed navigation between main app and admin page
 - Added GitHub repository with documentation
+- Added Cartridge Base to Ogive (B2O) measurement field
+- Renamed "Cartridge Overall Length" to "Cartridge Overall Length - COAL (inches)"
+- Reorganized UI in Results tab for better grouping of related fields
+- Updated test selection to show full test ID including date
+- Added sorting of test list by date and then by distance
+- Created script to generate random test data for development and testing
