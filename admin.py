@@ -8,9 +8,15 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    
+
     st.title("Component List Administration")
     st.markdown("---")
+    
+    # Add a link back to the main app
+    st.sidebar.markdown("### Navigation")
+    if st.sidebar.button("Back to Main App"):
+        import webbrowser
+        webbrowser.open("http://localhost:8501")
     
     # Load component lists
     component_lists = utils.load_component_lists()
