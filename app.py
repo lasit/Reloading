@@ -334,7 +334,7 @@ def main():
                     "Select existing test",
                     options=filtered_test_folders,
                     index=0 if filtered_test_folders else None,
-                    format_func=lambda x: x.split('__')[1] if '__' in x else x,
+                    format_func=lambda x: x,  # Display the full test ID including date
                     key="existing_test_id"
                 )
                 
