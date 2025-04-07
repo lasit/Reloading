@@ -361,56 +361,108 @@ def main():
         st.header("Data Visualization")
         
         if len(filtered_df) > 1:
-            # Create a figure for the group size and mean radius over time
-            st.subheader("Group Size and Mean Radius Over Time")
-            
             # Convert date strings to datetime objects for proper sorting
             filtered_df['date_obj'] = pd.to_datetime(filtered_df['date'])
             
             # Sort by date
             plot_df = filtered_df.sort_values('date_obj')
             
-            # Create the plot
-            fig, ax1 = plt.subplots(figsize=(12, 6))
+            # Create tabs for different charts
+            chart_tabs = st.tabs(["Accuracy Metrics", "Velocity Metrics"])
             
-            # Plot group size (MOA) on the left y-axis
-            color = 'tab:blue'
-            ax1.set_xlabel('Date')
-            ax1.set_ylabel('Group Size (MOA)', color=color)
-            ax1.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=color, label='Group Size (MOA)')
-            ax1.tick_params(axis='y', labelcolor=color)
+            # Tab 1: Group Size and Mean Radius Over Time
+            with chart_tabs[0]:
+                st.subheader("Group Size and Mean Radius Over Time")
+                
+                # Create the plot
+                fig1, ax1 = plt.subplots(figsize=(12, 6))
+                
+                # Plot group size (MOA) on the left y-axis
+                color = 'tab:blue'
+                ax1.set_xlabel('Date')
+                ax1.set_ylabel('Group Size (MOA)', color=color)
+                ax1.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=color, label='Group Size (MOA)')
+                ax1.tick_params(axis='y', labelcolor=color)
+                
+                # Create a second y-axis for mean radius
+                ax2 = ax1.twinx()
+                color = 'tab:red'
+                ax2.set_ylabel('Mean Radius (mm)', color=color)
+                ax2.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=color, label='Mean Radius (mm)')
+                ax2.tick_params(axis='y', labelcolor=color)
+                
+                # Rotate x-axis labels for better readability
+                plt.xticks(rotation=45)
+                
+                # Add a title and adjust layout
+                plt.title('Group Size and Mean Radius Over Time')
+                fig1.tight_layout()
+                
+                # Add a legend
+                lines1, labels1 = ax1.get_legend_handles_labels()
+                lines2, labels2 = ax2.get_legend_handles_labels()
+                ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+                
+                # Display the plot
+                st.pyplot(fig1)
+                
+                # Add explanation
+                st.markdown("""
+                **Chart Explanation:**
+                - **Blue Line (Left Axis)**: Group Size in Minutes of Angle (MOA) - smaller is better
+                - **Red Line (Right Axis)**: Mean Radius in millimeters (mm) - smaller is better
+                
+                This chart shows how your group sizes have changed over time for the filtered test data. 
+                Look for downward trends which indicate improving accuracy.
+                """)
             
-            # Create a second y-axis for mean radius
-            ax2 = ax1.twinx()
-            color = 'tab:red'
-            ax2.set_ylabel('Mean Radius (mm)', color=color)
-            ax2.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=color, label='Mean Radius (mm)')
-            ax2.tick_params(axis='y', labelcolor=color)
-            
-            # Rotate x-axis labels for better readability
-            plt.xticks(rotation=45)
-            
-            # Add a title and adjust layout
-            plt.title('Group Size and Mean Radius Over Time')
-            fig.tight_layout()
-            
-            # Add a legend
-            lines1, labels1 = ax1.get_legend_handles_labels()
-            lines2, labels2 = ax2.get_legend_handles_labels()
-            ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
-            
-            # Display the plot
-            st.pyplot(fig)
-            
-            # Add explanation
-            st.markdown("""
-            **Chart Explanation:**
-            - **Blue Line (Left Axis)**: Group Size in Minutes of Angle (MOA) - smaller is better
-            - **Red Line (Right Axis)**: Mean Radius in millimeters (mm) - smaller is better
-            
-            This chart shows how your group sizes have changed over time for the filtered test data. 
-            Look for downward trends which indicate improving accuracy.
-            """)
+            # Tab 2: Velocity Metrics Over Time
+            with chart_tabs[1]:
+                st.subheader("Velocity Metrics Over Time")
+                
+                # Create the plot
+                fig2, ax3 = plt.subplots(figsize=(12, 6))
+                
+                # Plot average velocity on the left y-axis
+                color = 'tab:green'
+                ax3.set_xlabel('Date')
+                ax3.set_ylabel('Average Velocity (fps)', color=color)
+                ax3.plot(plot_df['date_obj'], plot_df['avg_velocity_fps'], 'o-', color=color, label='Avg Velocity (fps)')
+                ax3.tick_params(axis='y', labelcolor=color)
+                
+                # Create a second y-axis for ES and SD
+                ax4 = ax3.twinx()
+                ax4.set_ylabel('Velocity Variation (fps)')
+                
+                # Plot ES and SD on the right y-axis with different colors
+                ax4.plot(plot_df['date_obj'], plot_df['es_fps'], 'o-', color='tab:orange', label='ES (fps)')
+                ax4.plot(plot_df['date_obj'], plot_df['sd_fps'], 'o-', color='tab:purple', label='SD (fps)')
+                
+                # Rotate x-axis labels for better readability
+                plt.xticks(rotation=45)
+                
+                # Add a title and adjust layout
+                plt.title('Velocity Metrics Over Time')
+                fig2.tight_layout()
+                
+                # Add a legend
+                lines3, labels3 = ax3.get_legend_handles_labels()
+                lines4, labels4 = ax4.get_legend_handles_labels()
+                ax3.legend(lines3 + lines4, labels3 + labels4, loc='upper left')
+                
+                # Display the plot
+                st.pyplot(fig2)
+                
+                # Add explanation
+                st.markdown("""
+                **Chart Explanation:**
+                - **Green Line (Left Axis)**: Average Velocity in feet per second (fps)
+                - **Orange Line (Right Axis)**: Extreme Spread (ES) in fps - smaller is better
+                - **Purple Line (Right Axis)**: Standard Deviation (SD) in fps - smaller is better
+                
+                This chart shows how your velocity metrics have changed over time for the filtered test data.
+                Look for consistent velocity (flat green line) and low variation (low orange and purple lines).
+                """)
         else:
             st.info("At least two data points are needed to create meaningful graphs. Adjust your filters to include more tests.")
     else:
