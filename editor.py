@@ -227,8 +227,8 @@ def generate_test_id(data: Dict[str, Any]) -> str:
     powder_model_clean = clean_str(data["ammo"]["powder"]["model"])
     primer_model_clean = clean_str(data["ammo"]["primer"]["model"])
     
-    # Format the test ID
-    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']}gr_{data['ammo']['coal_in']}in_{data['ammo']['b2o_in']}in_{primer_model_clean}"
+    # Format the test ID with 3 decimal places for COAL and B2O
+    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']}gr_{data['ammo']['coal_in']:.3f}in_{data['ammo']['b2o_in']:.3f}in_{primer_model_clean}"
     
     return test_id
 
