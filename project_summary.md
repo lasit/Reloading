@@ -200,3 +200,4 @@ Reloading/
   - Standard Deviation (SD)
 - Reorganized visualization interface with separate and combined chart views
 - Updated COAL and B2O measurements to display with 3 decimal places in test IDs for greater precision
+- Added custom YAML representer to preserve 3 decimal places in float values when saving data
