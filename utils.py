@@ -62,7 +62,7 @@ def load_yaml(file_path: str) -> Dict[str, Any]:
 def save_yaml(file_path: str, data: Dict[str, Any]) -> None:
     """
     Save a dictionary to a YAML file.
-    
+
     Args:
         file_path: Path where the YAML file will be saved
         data: Dictionary to save as YAML
@@ -71,7 +71,20 @@ def save_yaml(file_path: str, data: Dict[str, Any]) -> None:
     dir_name = os.path.dirname(file_path)
     if dir_name:  # Only create directories if there's a directory path
         os.makedirs(dir_name, exist_ok=True)
+
+    # Create a custom representer for floats to preserve decimal places
+    def represent_float(self, data):
+        if data == int(data):
+            return self.represent_int(int(data))
+        text = f'{data:.3f}'
+        # Remove trailing zeros after decimal point, but keep at least one decimal place
+        if '.' in text:
+            text = text.rstrip('0').rstrip('.') if text.rstrip('0').rstrip('.') != text.split('.')[0] else text
+        return self.represent_scalar('tag:yaml.org,2002:float', text)
     
+    # Register the custom representer
+    yaml.add_representer(float, represent_float)
+
     with open(file_path, 'w') as file:
         yaml.dump(data, file, default_flow_style=False, sort_keys=False)
 
