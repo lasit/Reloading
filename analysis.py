@@ -397,6 +397,43 @@ def main():
             # Sort by date
             plot_df = filtered_df.sort_values('date_obj')
             
+            # Create new columns for x-axis labels with all the requested information
+            # First, format the dates as strings in a readable format
+            plot_df['date_str'] = plot_df['date_obj'].dt.strftime('%d/%m/%Y')
+            
+            # Reset index to get sequential test numbers (0, 1, 2, 3...)
+            plot_df = plot_df.reset_index(drop=True)
+            
+            # Count occurrences of each date and add numbered extensions for duplicates
+            date_counts = {}
+            plot_df['x_label_top'] = ''    # Date part
+            plot_df['x_label_bottom'] = '' # Test index, powder charge, and COAL part
+            
+            for idx, row in plot_df.iterrows():
+                date_str = row['date_str']
+                test_idx = idx
+                powder_charge = row['powder_charge_gr']
+                coal = row['coal_in']
+                
+                # Format the date part with numbered extension if needed
+                if date_str in date_counts:
+                    date_counts[date_str] += 1
+                    date_label = f"{date_str} - {date_counts[date_str]:02d}"
+                else:
+                    date_counts[date_str] = 1
+                    if sum(1 for d in date_counts if d == date_str) > 1:
+                        # If this date appears multiple times (but this is the first occurrence)
+                        date_label = f"{date_str} - 01"
+                    else:
+                        date_label = date_str
+                
+                # Create the two-line label
+                plot_df.at[idx, 'x_label_top'] = date_label
+                plot_df.at[idx, 'x_label_bottom'] = f"[{test_idx}] - {powder_charge:.2f}gr - {coal:.3f}"
+                
+                # Also keep a single-line version for reference
+                plot_df.at[idx, 'x_label'] = f"{date_label}\n{plot_df.at[idx, 'x_label_bottom']}"
+            
             # Create tabs for different charts
             chart_tabs = st.tabs(["Separate Charts", "Combined Chart"])
             
@@ -412,14 +449,24 @@ def main():
                 color = 'tab:blue'
                 ax1.set_xlabel('Date')
                 ax1.set_ylabel('Group Size (MOA)', color=color)
-                ax1.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=color, label='Group Size (MOA)')
+                ax1.plot(range(len(plot_df)), plot_df['group_es_moa'], 'o-', color=color, label='Group Size (MOA)')
+                
+                # Set up multi-line x-axis labels
+                ax1.set_xticks(range(len(plot_df)))
+                
+                # Create multi-line labels
+                labels = []
+                for i in range(len(plot_df)):
+                    labels.append(f"{plot_df['x_label_top'].iloc[i]}\n{plot_df['x_label_bottom'].iloc[i]}")
+                
+                ax1.set_xticklabels(labels)
                 ax1.tick_params(axis='y', labelcolor=color)
                 
                 # Create a second y-axis for mean radius
                 ax2 = ax1.twinx()
                 color = 'tab:red'
                 ax2.set_ylabel('Mean Radius (mm)', color=color)
-                ax2.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=color, label='Mean Radius (mm)')
+                ax2.plot(range(len(plot_df)), plot_df['mean_radius_mm'], 'o-', color=color, label='Mean Radius (mm)')
                 ax2.tick_params(axis='y', labelcolor=color)
                 
                 # Rotate x-axis labels for better readability
@@ -457,7 +504,17 @@ def main():
                 color = 'tab:green'
                 ax3.set_xlabel('Date')
                 ax3.set_ylabel('Average Velocity (fps)', color=color)
-                ax3.plot(plot_df['date_obj'], plot_df['avg_velocity_fps'], 'o-', color=color, label='Avg Velocity (fps)')
+                ax3.plot(range(len(plot_df)), plot_df['avg_velocity_fps'], 'o-', color=color, label='Avg Velocity (fps)')
+                
+                # Set up multi-line x-axis labels
+                ax3.set_xticks(range(len(plot_df)))
+                
+                # Create multi-line labels
+                labels = []
+                for i in range(len(plot_df)):
+                    labels.append(f"{plot_df['x_label_top'].iloc[i]}\n{plot_df['x_label_bottom'].iloc[i]}")
+                
+                ax3.set_xticklabels(labels)
                 ax3.tick_params(axis='y', labelcolor=color)
                 
                 # Create a second y-axis for ES and SD
@@ -465,8 +522,8 @@ def main():
                 ax4.set_ylabel('Velocity Variation (fps)')
                 
                 # Plot ES and SD on the right y-axis with different colors
-                ax4.plot(plot_df['date_obj'], plot_df['es_fps'], 'o-', color='tab:orange', label='ES (fps)')
-                ax4.plot(plot_df['date_obj'], plot_df['sd_fps'], 'o-', color='tab:purple', label='SD (fps)')
+                ax4.plot(range(len(plot_df)), plot_df['es_fps'], 'o-', color='tab:orange', label='ES (fps)')
+                ax4.plot(range(len(plot_df)), plot_df['sd_fps'], 'o-', color='tab:purple', label='SD (fps)')
                 
                 # Rotate x-axis labels for better readability
                 plt.xticks(rotation=45)
@@ -513,7 +570,17 @@ def main():
                 # First axis - Group Size (MOA)
                 ax5.set_xlabel('Date')
                 ax5.set_ylabel('Group Size (MOA)', color=colors['group_es_moa'])
-                ax5.plot(plot_df['date_obj'], plot_df['group_es_moa'], 'o-', color=colors['group_es_moa'], label='Group Size (MOA)')
+                ax5.plot(range(len(plot_df)), plot_df['group_es_moa'], 'o-', color=colors['group_es_moa'], label='Group Size (MOA)')
+                
+                # Set up multi-line x-axis labels
+                ax5.set_xticks(range(len(plot_df)))
+                
+                # Create multi-line labels
+                labels = []
+                for i in range(len(plot_df)):
+                    labels.append(f"{plot_df['x_label_top'].iloc[i]}\n{plot_df['x_label_bottom'].iloc[i]}")
+                
+                ax5.set_xticklabels(labels)
                 ax5.tick_params(axis='y', labelcolor=colors['group_es_moa'])
                 
                 # Create additional axes
@@ -530,22 +597,22 @@ def main():
                 
                 # Mean Radius (mm)
                 ax6.set_ylabel('Mean Radius (mm)', color=colors['mean_radius_mm'])
-                ax6.plot(plot_df['date_obj'], plot_df['mean_radius_mm'], 'o-', color=colors['mean_radius_mm'], label='Mean Radius (mm)')
+                ax6.plot(range(len(plot_df)), plot_df['mean_radius_mm'], 'o-', color=colors['mean_radius_mm'], label='Mean Radius (mm)')
                 ax6.tick_params(axis='y', labelcolor=colors['mean_radius_mm'])
                 
                 # Average Velocity (fps)
                 ax7.set_ylabel('Avg Velocity (fps)', color=colors['avg_velocity_fps'])
-                ax7.plot(plot_df['date_obj'], plot_df['avg_velocity_fps'], 'o-', color=colors['avg_velocity_fps'], label='Avg Velocity (fps)')
+                ax7.plot(range(len(plot_df)), plot_df['avg_velocity_fps'], 'o-', color=colors['avg_velocity_fps'], label='Avg Velocity (fps)')
                 ax7.tick_params(axis='y', labelcolor=colors['avg_velocity_fps'])
                 
                 # ES (fps)
                 ax8.set_ylabel('ES (fps)', color=colors['es_fps'])
-                ax8.plot(plot_df['date_obj'], plot_df['es_fps'], 'o-', color=colors['es_fps'], label='ES (fps)')
+                ax8.plot(range(len(plot_df)), plot_df['es_fps'], 'o-', color=colors['es_fps'], label='ES (fps)')
                 ax8.tick_params(axis='y', labelcolor=colors['es_fps'])
                 
                 # SD (fps)
                 ax9.set_ylabel('SD (fps)', color=colors['sd_fps'])
-                ax9.plot(plot_df['date_obj'], plot_df['sd_fps'], 'o-', color=colors['sd_fps'], label='SD (fps)')
+                ax9.plot(range(len(plot_df)), plot_df['sd_fps'], 'o-', color=colors['sd_fps'], label='SD (fps)')
                 ax9.tick_params(axis='y', labelcolor=colors['sd_fps'])
                 
                 # Rotate x-axis labels for better readability

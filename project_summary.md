@@ -119,3 +119,8 @@ Reloading/
 - Improved UI readability with clearer section separation between ammunition components
 - Fixed slider errors in analysis.py to ensure min and max values are always different
 - Added horizontal separator lines between sections in the Ammunition tab
+- Enhanced data analysis charts with detailed x-axis labels:
+  - Added numbered extensions for tests on the same date (e.g., "09/04/2025 - 01", "09/04/2025 - 02")
+  - Included test index, powder charge, and COAL in labels for easy identification
+  - Split labels into two lines for better readability
+  - Applied consistent formatting across all charts
