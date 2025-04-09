@@ -145,12 +145,18 @@ def main():
         )
         
         # Distance range filter
+        min_distance = int(df["distance_m"].min()) if not df.empty else 0
+        max_distance = int(df["distance_m"].max()) if not df.empty else 1000
+        
+        # Ensure max_distance is greater than min_distance to avoid slider error
+        if max_distance <= min_distance:
+            max_distance = min_distance + 100
+            
         distance_range = st.slider(
             "Distance Range (m)",
-            min_value=int(df["distance_m"].min()) if not df.empty else 0,
-            max_value=int(df["distance_m"].max()) if not df.empty else 1000,
-            value=(int(df["distance_m"].min()) if not df.empty else 0, 
-                   int(df["distance_m"].max()) if not df.empty else 1000),
+            min_value=min_distance,
+            max_value=max_distance,
+            value=(min_distance, max_distance),
             step=100
         )
         
@@ -207,22 +213,34 @@ def main():
         st.subheader("Environment")
         
         # Temperature range filter
+        min_temp = float(df["temperature_c"].min()) if not df.empty else 0.0
+        max_temp = float(df["temperature_c"].max()) if not df.empty else 40.0
+        
+        # Ensure max_temp is greater than min_temp to avoid slider error
+        if max_temp <= min_temp:
+            max_temp = min_temp + 10.0
+            
         temp_range = st.slider(
             "Temperature Range (°C)",
-            min_value=float(df["temperature_c"].min()) if not df.empty else 0.0,
-            max_value=float(df["temperature_c"].max()) if not df.empty else 40.0,
-            value=(float(df["temperature_c"].min()) if not df.empty else 0.0, 
-                   float(df["temperature_c"].max()) if not df.empty else 40.0),
+            min_value=min_temp,
+            max_value=max_temp,
+            value=(min_temp, max_temp),
             step=1.0
         )
         
         # Wind speed range filter
+        min_wind = float(df["wind_speed_mps"].min()) if not df.empty else 0.0
+        max_wind = float(df["wind_speed_mps"].max()) if not df.empty else 10.0
+        
+        # Ensure max_wind is greater than min_wind to avoid slider error
+        if max_wind <= min_wind:
+            max_wind = min_wind + 5.0
+            
         wind_range = st.slider(
             "Wind Speed Range (m/s)",
-            min_value=float(df["wind_speed_mps"].min()) if not df.empty else 0.0,
-            max_value=float(df["wind_speed_mps"].max()) if not df.empty else 10.0,
-            value=(float(df["wind_speed_mps"].min()) if not df.empty else 0.0, 
-                   float(df["wind_speed_mps"].max()) if not df.empty else 10.0),
+            min_value=min_wind,
+            max_value=max_wind,
+            value=(min_wind, max_wind),
             step=1.0
         )
         
@@ -233,22 +251,34 @@ def main():
         st.subheader("Results")
         
         # Group size range filter
+        min_group = float(df["group_es_mm"].min()) if not df.empty else 0.0
+        max_group = float(df["group_es_mm"].max()) if not df.empty else 200.0
+        
+        # Ensure max_group is greater than min_group to avoid slider error
+        if max_group <= min_group:
+            max_group = min_group + 20.0
+            
         group_es_range = st.slider(
             "Group Size Range (mm)",
-            min_value=float(df["group_es_mm"].min()) if not df.empty else 0.0,
-            max_value=float(df["group_es_mm"].max()) if not df.empty else 200.0,
-            value=(float(df["group_es_mm"].min()) if not df.empty else 0.0, 
-                   float(df["group_es_mm"].max()) if not df.empty else 200.0),
+            min_value=min_group,
+            max_value=max_group,
+            value=(min_group, max_group),
             step=10.0
         )
         
         # Velocity range filter
+        min_velocity = float(df["avg_velocity_fps"].min()) if not df.empty else 0.0
+        max_velocity = float(df["avg_velocity_fps"].max()) if not df.empty else 3000.0
+        
+        # Ensure max_velocity is greater than min_velocity to avoid slider error
+        if max_velocity <= min_velocity:
+            max_velocity = min_velocity + 500.0
+            
         velocity_range = st.slider(
             "Velocity Range (fps)",
-            min_value=float(df["avg_velocity_fps"].min()) if not df.empty else 0.0,
-            max_value=float(df["avg_velocity_fps"].max()) if not df.empty else 3000.0,
-            value=(float(df["avg_velocity_fps"].min()) if not df.empty else 0.0, 
-                   float(df["avg_velocity_fps"].max()) if not df.empty else 3000.0),
+            min_value=min_velocity,
+            max_value=max_velocity,
+            value=(min_velocity, max_velocity),
             step=100.0
         )
     

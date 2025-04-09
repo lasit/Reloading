@@ -227,8 +227,8 @@ def generate_test_id(data: Dict[str, Any]) -> str:
     powder_model_clean = clean_str(data["ammo"]["powder"]["model"])
     primer_model_clean = clean_str(data["ammo"]["primer"]["model"])
     
-    # Format the test ID with 3 decimal places for COAL and B2O
-    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']}gr_{data['ammo']['coal_in']:.3f}in_{data['ammo']['b2o_in']:.3f}in_{primer_model_clean}"
+    # Format the test ID with 2 decimal places for powder charge and 3 decimal places for COAL and B2O
+    test_id = f"{date_str}__{data['distance_m']}m_{calibre_clean}_{rifle_clean}_{bullet_model_clean}_{data['ammo']['bullet']['weight_gr']}gr_{powder_model_clean}_{data['ammo']['powder']['charge_gr']:.2f}gr_{data['ammo']['coal_in']:.3f}in_{data['ammo']['b2o_in']:.3f}in_{primer_model_clean}"
     
     return test_id
 
@@ -422,13 +422,15 @@ def create_test_form(test_data: Dict[str, Any], new_test: bool = False) -> Dict[
                 "Cartridge Overall Length - COAL (inches)", 
                 min_value=0.0, 
                 value=float(test_data["ammo"]["coal_in"]),
-                step=0.001
+                step=0.001,
+                format="%.3f"
             )
             test_data["ammo"]["b2o_in"] = st.number_input(
                 "Cartridge Base to Ogive - B2O (inches)",
                 min_value=0.0,
                 value=float(test_data["ammo"]["b2o_in"]),
-                step=0.001
+                step=0.001,
+                format="%.3f"
             )
         
         # Tab 4: Environment
