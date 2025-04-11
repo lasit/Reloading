@@ -25,8 +25,11 @@ Each page can be accessed through its respective URL or through the navigation b
 Reloading/
 ├── app.py              ← main Streamlit app
 ├── admin.py            ← component list admin interface
+├── analysis.py         ← data analysis and visualization
 ├── editor.py           ← form components
 ├── utils.py            ← YAML load/save functions
+├── start_apps.py       ← Python script to start all apps
+├── start_apps.sh       ← Shell script to start all apps
 ├── Component_List.yaml ← dropdown list data
 ├── requirements.txt    ← dependencies
 ├── README.md           ← project documentation
@@ -62,7 +65,18 @@ Reloading/
    - File existence checking
    - Component list management
 
-4. **Admin Interface**
+4. **Data Analysis and Visualization**
+   - Comprehensive filtering system for all test parameters
+   - Interactive data tables for comparing test results
+   - Multiple visualization options:
+     - Separate charts for accuracy metrics (Group Size and Mean Radius)
+     - Separate charts for velocity metrics (Average Velocity, ES, and SD)
+     - Combined multi-axis chart showing all 5 key metrics together
+   - Detailed x-axis labels with date, test index, powder charge, and COAL
+   - Multi-line labels for improved readability
+   - Automatic detection of tests conducted on the same date with sequential numbering
+
+5. **Admin Interface**
    - Dedicated admin page for managing component lists
    - Add, edit, and delete items in component lists
    - Organized by component type in tabs
@@ -92,6 +106,18 @@ Reloading/
 - **Dependencies**:
   - streamlit==1.32.0
   - pyyaml==6.0.1
+  - matplotlib==3.9.4
+  - streamlit-aggrid==0.3.4
+
+- **Application Startup**:
+  - The application can be started using either:
+    - `python3 start_apps.py`: Python script that starts all three Streamlit applications simultaneously, with proper error handling and logging
+    - `bash start_apps.sh`: Shell script alternative for starting all applications
+  - Each script starts the three applications on their respective ports:
+    - Main App on port 8501
+    - Data Analysis on port 8502
+    - Admin Interface on port 8503
+  - Both scripts provide console output with URLs to access each application
 
 
 ## Development History
@@ -140,3 +166,7 @@ Reloading/
   - Included test index, powder charge, and COAL in labels for easy identification
   - Split labels into two lines for better readability
   - Applied consistent formatting across all charts
+- Created application startup scripts for improved user experience:
+  - Added start_apps.py with robust error handling, logging, and graceful shutdown
+  - Added start_apps.sh as a shell script alternative
+  - Both scripts automatically start all three application components simultaneously
