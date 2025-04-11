@@ -3,6 +3,23 @@
 ## Project Overview
 This Streamlit application manages precision rifle load development test data. It allows users to browse test folders, load and edit YAML files, display them in a structured form, and save changes back. The application includes dropdown lists for common components and an admin interface for managing these lists.
 
+## Application Pages
+The application is split into three Streamlit pages, each serving a specific purpose:
+
+1. **Main App** (http://localhost:8501)
+   - For managing test data and creating new tests
+   - Primary interface for data entry and test management
+
+2. **Data Analysis** (http://localhost:8502)
+   - For analyzing and visualizing test data
+   - Interactive charts and filtering capabilities
+
+3. **Admin Interface** (http://localhost:8503)
+   - For managing component lists and options
+   - Add, edit, and delete component options
+
+Each page can be accessed through its respective URL or through the navigation buttons in the sidebar of any page.
+
 ## Project Structure
 ```
 Reloading/
