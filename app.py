@@ -133,14 +133,6 @@ def parse_test_id(test_id: str) -> Tuple[str, str, str, str, str, str, str, str,
             primer_brand = parts[12]
             primer_model = parts[13]
             
-            # Parse B2O
-            if b2o.endswith('in'):
-                b2o = b2o[:-2]  # Remove 'in' suffix
-            try:
-                data["ammo"]["b2o_in"] = float(b2o)
-            except ValueError:
-                pass
-
             return (date_part, distance, calibre, rifle, case_brand, bullet_brand, bullet_model, bullet_weight, powder_brand, powder_model, charge, coal, primer_brand, primer_model)
         else:
             # Old format without brand fields

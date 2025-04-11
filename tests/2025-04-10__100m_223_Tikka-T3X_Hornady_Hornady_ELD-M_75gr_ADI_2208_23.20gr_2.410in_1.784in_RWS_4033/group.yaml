@@ -1,0 +1,56 @@
+test_id: 2025-04-10__100m_223_Tikka-T3X_Hornady_Hornady_ELD-M_75gr_ADI_2208_23.20gr_2.410in_1.784in_RWS_4033
+date: '2025-04-10'
+distance_m: 100
+platform:
+  calibre: '223'
+  rifle: Tikka T3X
+  barrel_length_in: 0
+  twist_rate: ''
+ammo:
+  case:
+    brand: Hornady
+    lot: ''
+    neck_turned: 'No'
+    brass_sizing: Neck Only with Bushing
+    bushing_size: 0.245
+    shoulder_bump: 0
+  bullet:
+    brand: Hornady
+    model: ELD-M
+    weight_gr: 75
+    lot: ''
+  powder:
+    brand: ADI
+    model: '2208'
+    charge_gr: 23.2
+    lot: ''
+  primer:
+    brand: RWS
+    model: '4033'
+    lot: ''
+  coal_in: 2.41
+  b2o_in: 1.784
+environment:
+  temperature_c: 35
+  humidity_percent: 50
+  pressure_hpa: 1005
+  wind_speed_mps: 2
+  wind_dir_deg: 90
+  weather: Overcast
+group:
+  group_es_mm: 43.28
+  group_es_moa: 1.488
+  group_es_x_mm: 30.21
+  group_es_y_mm: 33.56
+  mean_radius_mm: 22.22
+  poi_x_mm: 7.08
+  poi_y_mm: 3.27
+  shots: 8
+chrono:
+  avg_velocity_fps: 2615.5
+  sd_fps: 11.9
+  es_fps: 39.9
+files:
+  chrono_csv: chrono.csv
+  target_photo: target.jpg
+notes: ''
