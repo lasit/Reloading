@@ -175,3 +175,7 @@ Reloading/
   - Added pandas import to app.py to fix DataFrame loading issues
   - Removed 'key' parameter from dataframe() function to ensure compatibility with older Streamlit versions
   - Tested all three application components (Main App, Data Analysis, Admin Interface) to ensure they work correctly
+- Changed application theme from dark to light mode:
+  - Created a global Streamlit configuration file in the user's home directory (~/.streamlit/config.toml)
+  - Set the theme base to "light" in the configuration file
+  - Verified that all three applications (Main App, Data Analysis, Admin Interface) now use the light theme
