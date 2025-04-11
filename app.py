@@ -2,6 +2,7 @@ import streamlit as st
 import datetime
 import os
 import re
+import pandas as pd
 from typing import Dict, Any, Optional, Tuple
 import utils
 from utils import load_component_lists
@@ -211,6 +212,94 @@ def generate_test_id(date: str, distance_m: int, calibre: str, rifle: str,
     return test_id
 
 
+def load_all_test_data():
+    """
+    Load all test data from the tests directory into a pandas DataFrame.
+    
+    Returns:
+        DataFrame containing all test data
+    """
+    test_folders = utils.get_test_folders()
+    all_data = []
+    
+    for test_id in test_folders:
+        try:
+            data = utils.get_test_data(test_id)
+            if data:
+                # Flatten the nested structure for easier filtering
+                flat_data = {
+                    "test_id": test_id,
+                    "date": data.get("date", ""),
+                    "distance_m": data.get("distance_m", 0),
+                    
+                    # Platform
+                    "calibre": data.get("platform", {}).get("calibre", ""),
+                    "rifle": data.get("platform", {}).get("rifle", ""),
+                    "barrel_length_in": data.get("platform", {}).get("barrel_length_in", 0.0),
+                    "twist_rate": data.get("platform", {}).get("twist_rate", ""),
+                    
+                    # Ammo - Case
+                    "case_brand": data.get("ammo", {}).get("case", {}).get("brand", ""),
+                    "case_lot": data.get("ammo", {}).get("case", {}).get("lot", ""),
+                    "neck_turned": data.get("ammo", {}).get("case", {}).get("neck_turned", ""),
+                    "brass_sizing": data.get("ammo", {}).get("case", {}).get("brass_sizing", ""),
+                    "bushing_size": data.get("ammo", {}).get("case", {}).get("bushing_size", 0.0),
+                    "shoulder_bump": data.get("ammo", {}).get("case", {}).get("shoulder_bump", 0.0),
+                    
+                    # Ammo - Bullet
+                    "bullet_brand": data.get("ammo", {}).get("bullet", {}).get("brand", ""),
+                    "bullet_model": data.get("ammo", {}).get("bullet", {}).get("model", ""),
+                    "bullet_weight_gr": data.get("ammo", {}).get("bullet", {}).get("weight_gr", 0.0),
+                    "bullet_lot": data.get("ammo", {}).get("bullet", {}).get("lot", ""),
+                    
+                    # Ammo - Powder
+                    "powder_brand": data.get("ammo", {}).get("powder", {}).get("brand", ""),
+                    "powder_model": data.get("ammo", {}).get("powder", {}).get("model", ""),
+                    "powder_charge_gr": data.get("ammo", {}).get("powder", {}).get("charge_gr", 0.0),
+                    "powder_lot": data.get("ammo", {}).get("powder", {}).get("lot", ""),
+                    
+                    # Ammo - Primer
+                    "primer_brand": data.get("ammo", {}).get("primer", {}).get("brand", ""),
+                    "primer_model": data.get("ammo", {}).get("primer", {}).get("model", ""),
+                    "primer_lot": data.get("ammo", {}).get("primer", {}).get("lot", ""),
+                    
+                    # Ammo - Cartridge Measurements
+                    "coal_in": data.get("ammo", {}).get("coal_in", 0.0),
+                    "b2o_in": data.get("ammo", {}).get("b2o_in", 0.0),
+                    
+                    # Environment
+                    "temperature_c": data.get("environment", {}).get("temperature_c", 0.0),
+                    "humidity_percent": data.get("environment", {}).get("humidity_percent", 0),
+                    "pressure_hpa": data.get("environment", {}).get("pressure_hpa", 0),
+                    "wind_speed_mps": data.get("environment", {}).get("wind_speed_mps", 0.0),
+                    "wind_dir_deg": data.get("environment", {}).get("wind_dir_deg", 0),
+                    "weather": data.get("environment", {}).get("weather", ""),
+                    
+                    # Group
+                    "shots": data.get("group", {}).get("shots", 0),
+                    "group_es_mm": data.get("group", {}).get("group_es_mm", 0.0),
+                    "group_es_moa": data.get("group", {}).get("group_es_moa", 0.0),
+                    "group_es_x_mm": data.get("group", {}).get("group_es_x_mm", 0.0),
+                    "group_es_y_mm": data.get("group", {}).get("group_es_y_mm", 0.0),
+                    "mean_radius_mm": data.get("group", {}).get("mean_radius_mm", 0.0),
+                    "poi_x_mm": data.get("group", {}).get("poi_x_mm", 0.0),
+                    "poi_y_mm": data.get("group", {}).get("poi_y_mm", 0.0),
+                    
+                    # Chrono
+                    "avg_velocity_fps": data.get("chrono", {}).get("avg_velocity_fps", 0.0),
+                    "sd_fps": data.get("chrono", {}).get("sd_fps", 0.0),
+                    "es_fps": data.get("chrono", {}).get("es_fps", 0.0),
+                    
+                    # Notes
+                    "notes": data.get("notes", "")
+                }
+                all_data.append(flat_data)
+        except Exception as e:
+            print(f"Error loading test data for {test_id}: {e}")
+    
+    return pd.DataFrame(all_data)
+
+
 def load_test_data(test_id: str) -> Dict[str, Any]:
     """
     Load test data for a specific test ID.
@@ -297,83 +386,214 @@ def main():
         page_title="Precision Load Development",
         page_icon="🎯",
         layout="wide",
-        initial_sidebar_state="expanded",
+        initial_sidebar_state="collapsed",
     )
     
     st.title("Precision Rifle Load Development")
+    
+    # Navigation bar at the top
+    col1, col2, col3, col4 = st.columns([1, 1, 1, 3])
+    with col1:
+        new_test = st.button("Create New Test", key="new_test_button", use_container_width=True)
+    with col2:
+        if st.button("Data Analysis", key="data_analysis_button", use_container_width=True):
+            import webbrowser
+            webbrowser.open("http://localhost:8502")
+    with col3:
+        if st.button("Admin", key="admin_button", use_container_width=True):
+            import webbrowser
+            webbrowser.open("http://localhost:8503")
+    
     st.markdown("---")
     
     # Load component lists for dropdown menus
     component_lists = load_component_lists()
     
-    # Sidebar for test selection
-    with st.sidebar:
-        st.header("Test Selection")
-        
-        # Get list of test folders
-        test_folders = utils.get_test_folders()
-        
-        # Add search box for filtering tests
+    # Load all test data
+    with st.spinner("Loading test data..."):
+        df = load_all_test_data()
+    
+    # Create filter section
+    st.header("Filter Tests")
+    st.markdown("Select filter criteria to narrow down the tests. Leave a filter empty to include all values.")
+    
+    # Create filter UI with multiple columns for better space usage
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        # Test ID search
         search_query = st.text_input("Search Tests", key="search_tests", placeholder="Filter by test ID...")
         
-        # Sort test folders by date and then by distance
-        def sort_key(folder):
-            parts = folder.split('__')
-            if len(parts) != 2:
-                return ("", 0)  # Default for invalid format
-            
-            date_part = parts[0]
-            
-            # Extract distance from the second part (e.g., "100m_...")
-            distance_part = parts[1].split('_')[0] if '_' in parts[1] else ""
-            try:
-                # Remove 'm' suffix if present and convert to integer
-                distance = int(distance_part.rstrip('m'))
-            except (ValueError, AttributeError):
-                distance = 0
-                
-            return (date_part, distance)
+        # Date range filter
+        min_date = df["date"].min() if not df.empty else datetime.date.today().isoformat()
+        max_date = df["date"].max() if not df.empty else datetime.date.today().isoformat()
         
-        sorted_test_folders = sorted(test_folders, key=sort_key)
-        
-        # Filter test folders based on search query
-        if search_query:
-            filtered_test_folders = [folder for folder in sorted_test_folders if search_query.lower() in folder.lower()]
-        else:
-            filtered_test_folders = sorted_test_folders
-        
-        # Option to create a new test
-        new_test = st.checkbox("Create new test", key="new_test_checkbox")
-        
-        if new_test:
-            st.info("Fill in the form and click 'Generate Test ID' to create a new test.")
-            test_id = ""
-        else:
-            if filtered_test_folders:
-                test_id = st.selectbox(
-                    "Select existing test",
-                    options=filtered_test_folders,
-                    index=0 if filtered_test_folders else None,
-                    format_func=lambda x: x,  # Display the full test ID including date
-                    key="existing_test_id"
-                )
-                
-                # Display number of filtered tests
-                if search_query and len(filtered_test_folders) < len(test_folders):
-                    st.caption(f"Showing {len(filtered_test_folders)} of {len(test_folders)} tests")
-            else:
-                if search_query:
-                    st.warning(f"No tests found matching '{search_query}'. Clear search or create a new test.")
-                    test_id = ""
-                else:
-                    st.warning("No existing tests found. Create a new test instead.")
-                    test_id = ""
-                    new_test = True
+        date_range = st.date_input(
+            "Date Range",
+            value=(
+                datetime.date.fromisoformat(min_date) if isinstance(min_date, str) else datetime.date.today(),
+                datetime.date.fromisoformat(max_date) if isinstance(max_date, str) else datetime.date.today()
+            ),
+            key="date_range"
+        )
     
-    # Load test data
-    test_data = load_test_data(test_id)
+    with col2:
+        # Distance range filter
+        min_distance = int(df["distance_m"].min()) if not df.empty else 0
+        max_distance = int(df["distance_m"].max()) if not df.empty else 1000
+        
+        # Ensure max_distance is greater than min_distance to avoid slider error
+        if max_distance <= min_distance:
+            max_distance = min_distance + 100
+            
+        distance_range = st.slider(
+            "Distance Range (m)",
+            min_value=min_distance,
+            max_value=max_distance,
+            value=(min_distance, max_distance),
+            step=100
+        )
+        
+        # Calibre filter
+        calibre_options = ["All"] + sorted(df["calibre"].unique().tolist())
+        selected_calibre = st.selectbox("Calibre", options=calibre_options)
+        
+        # Rifle filter
+        rifle_options = ["All"] + sorted(df["rifle"].unique().tolist())
+        selected_rifle = st.selectbox("Rifle", options=rifle_options)
     
-    # Handle test ID generation outside the form
+    with col3:
+        # Bullet weight filter
+        bullet_weight_options = ["All"] + sorted(df["bullet_weight_gr"].unique().tolist())
+        selected_bullet_weight = st.selectbox("Bullet Weight (gr)", options=bullet_weight_options)
+        
+        # Powder brand filter
+        powder_brand_options = ["All"] + sorted(df["powder_brand"].unique().tolist())
+        selected_powder_brand = st.selectbox("Powder Brand", options=powder_brand_options)
+        
+        # Powder model filter
+        powder_model_options = ["All"] + sorted(df["powder_model"].unique().tolist())
+        selected_powder_model = st.selectbox("Powder Model", options=powder_model_options)
+    
+    with col4:
+        # Powder charge filter
+        min_charge = float(df["powder_charge_gr"].min()) if not df.empty else 0.0
+        max_charge = float(df["powder_charge_gr"].max()) if not df.empty else 50.0
+        
+        # Ensure max_charge is greater than min_charge to avoid slider error
+        if max_charge <= min_charge:
+            max_charge = min_charge + 5.0
+            
+        charge_range = st.slider(
+            "Powder Charge Range (gr)",
+            min_value=min_charge,
+            max_value=max_charge,
+            value=(min_charge, max_charge),
+            step=0.1
+        )
+        
+        # COAL filter
+        min_coal = float(df["coal_in"].min()) if not df.empty else 0.0
+        max_coal = float(df["coal_in"].max()) if not df.empty else 3.0
+        
+        # Ensure max_coal is greater than min_coal to avoid slider error
+        if max_coal <= min_coal:
+            max_coal = min_coal + 0.5
+            
+        coal_range = st.slider(
+            "COAL Range (inches)",
+            min_value=min_coal,
+            max_value=max_coal,
+            value=(min_coal, max_coal),
+            step=0.01
+        )
+    
+    # Apply filters
+    filtered_df = df.copy()
+    
+    # Test ID search filter
+    if search_query:
+        filtered_df = filtered_df[filtered_df["test_id"].str.contains(search_query, case=False)]
+    
+    # Date filter
+    if len(date_range) == 2:
+        start_date, end_date = date_range
+        filtered_df = filtered_df[
+            (filtered_df["date"] >= start_date.isoformat()) & 
+            (filtered_df["date"] <= end_date.isoformat())
+        ]
+    
+    # Distance filter
+    filtered_df = filtered_df[
+        (filtered_df["distance_m"] >= distance_range[0]) & 
+        (filtered_df["distance_m"] <= distance_range[1])
+    ]
+    
+    # Calibre filter
+    if selected_calibre != "All":
+        filtered_df = filtered_df[filtered_df["calibre"] == selected_calibre]
+    
+    # Rifle filter
+    if selected_rifle != "All":
+        filtered_df = filtered_df[filtered_df["rifle"] == selected_rifle]
+    
+    # Bullet weight filter
+    if selected_bullet_weight != "All":
+        filtered_df = filtered_df[filtered_df["bullet_weight_gr"] == selected_bullet_weight]
+    
+    # Powder brand filter
+    if selected_powder_brand != "All":
+        filtered_df = filtered_df[filtered_df["powder_brand"] == selected_powder_brand]
+    
+    # Powder model filter
+    if selected_powder_model != "All":
+        filtered_df = filtered_df[filtered_df["powder_model"] == selected_powder_model]
+    
+    # Powder charge filter
+    filtered_df = filtered_df[
+        (filtered_df["powder_charge_gr"] >= charge_range[0]) & 
+        (filtered_df["powder_charge_gr"] <= charge_range[1])
+    ]
+    
+    # COAL filter
+    filtered_df = filtered_df[
+        (filtered_df["coal_in"] >= coal_range[0]) & 
+        (filtered_df["coal_in"] <= coal_range[1])
+    ]
+    
+    # Display filtered results
+    st.header("Test Results")
+    st.markdown(f"Found **{len(filtered_df)}** tests matching your criteria.")
+    
+    if not filtered_df.empty:
+        # Select columns to display
+        display_columns = [
+            "test_id", "date", "distance_m", "calibre", "rifle", 
+            "bullet_brand", "bullet_model", "bullet_weight_gr", 
+            "powder_brand", "powder_model", "powder_charge_gr",
+            "coal_in", "group_es_mm", "group_es_moa", "avg_velocity_fps"
+        ]
+        
+        # Display the filtered tests
+        st.dataframe(filtered_df[display_columns], use_container_width=True)
+        
+        # Allow user to select a test from the filtered results
+        selected_test_id = st.selectbox(
+            "Select a test to edit",
+            options=filtered_df["test_id"].tolist(),
+            format_func=lambda x: x,
+            key="selected_test_id"
+        )
+        
+        # Load the selected test data
+        test_data = load_test_data(selected_test_id)
+    else:
+        st.warning("No tests match the selected filters. Try adjusting your criteria.")
+        # Create empty test data if no tests are found
+        test_data = create_empty_test_data()
+        selected_test_id = ""
+    
+    # Handle test ID generation for new test
     if new_test:
         st.subheader("Generate Test ID")
         st.info("Fill in the required fields below and click 'Generate Test ID' to create a new test folder.")
@@ -617,10 +837,10 @@ def main():
             st.success(f"Test data for '{new_test_id}' saved successfully!")
     
     # Display current test ID
-    if test_id:
+    if selected_test_id:
         st.subheader("Current Test ID")
-        st.code(test_id)
-        test_data["test_id"] = test_id
+        st.code(selected_test_id)
+        test_data["test_id"] = selected_test_id
     elif hasattr(st.session_state, 'generated_test_id'):
         st.subheader("Generated Test ID")
         st.code(st.session_state.generated_test_id)

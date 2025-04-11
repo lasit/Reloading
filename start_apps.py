@@ -50,7 +50,7 @@ def main():
         
         # Build the command
         cmd = [
-            "streamlit", "run", 
+            "python3", "-m", "streamlit", "run", 
             app["script"], 
             "--server.port", str(app["port"]),
             "--server.headless", "true"
