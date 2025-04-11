@@ -131,11 +131,10 @@ Reloading/
 - Added custom YAML representer to preserve 3 decimal places in float values when saving data
 - Added format="%.3f" to COAL and B2O number input fields to maintain 3 decimal places in the UI
 - Made B2O a required field when creating a new test, similar to COAL
-- Fixed powder charge precision in folder names to maintain 2 decimal places
-- Added Gordon GRT analysis image display in the Results tab
+- Changed powder charge precision in folder names to use integer values instead of 2 decimal places
+- Added code to parse B2O values from test IDs
 - Improved UI readability with clearer section separation between ammunition components
 - Fixed slider errors in analysis.py to ensure min and max values are always different
-- Added horizontal separator lines between sections in the Ammunition tab
 - Enhanced data analysis charts with detailed x-axis labels:
   - Added numbered extensions for tests on the same date (e.g., "09/04/2025 - 01", "09/04/2025 - 02")
   - Included test index, powder charge, and COAL in labels for easy identification

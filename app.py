@@ -133,6 +133,14 @@ def parse_test_id(test_id: str) -> Tuple[str, str, str, str, str, str, str, str,
             primer_brand = parts[12]
             primer_model = parts[13]
             
+            # Parse B2O
+            if b2o.endswith('in'):
+                b2o = b2o[:-2]  # Remove 'in' suffix
+            try:
+                data["ammo"]["b2o_in"] = float(b2o)
+            except ValueError:
+                pass
+
             return (date_part, distance, calibre, rifle, case_brand, bullet_brand, bullet_model, bullet_weight, powder_brand, powder_model, charge, coal, primer_brand, primer_model)
         else:
             # Old format without brand fields
@@ -197,9 +205,8 @@ def generate_test_id(date: str, distance_m: int, calibre: str, rifle: str,
     primer_model_clean = clean_str(primer_model)
     
     # Format the test ID with the original format
-    # Use integer values for bullet weight but preserve 2 decimal places for powder charge
-    # Format COAL and B2O with 3 decimal places
-    test_id = f"{date_str}__{distance_m}m_{calibre_clean}_{rifle_clean}_{case_brand_clean}_{bullet_brand_clean}_{bullet_model_clean}_{int(bullet_weight)}gr_{powder_brand_clean}_{powder_model_clean}_{powder_charge:.2f}gr_{coal:.3f}in_{b2o:.3f}in_{primer_brand_clean}_{primer_model_clean}"
+    # Use integer values for weights (no decimal points) and format COAL with 3 decimal places
+    test_id = f"{date_str}__{distance_m}m_{calibre_clean}_{rifle_clean}_{case_brand_clean}_{bullet_brand_clean}_{bullet_model_clean}_{int(bullet_weight)}gr_{powder_brand_clean}_{powder_model_clean}_{int(powder_charge)}gr_{coal:.3f}in_{b2o:.3f}in_{primer_brand_clean}_{primer_model_clean}"
     
     return test_id
 
@@ -502,21 +509,11 @@ def main():
         
         with col2:
             gen_coal = st.number_input(
-                "COAL (inches) *",
-                min_value=0.0,
+                "COAL (inches) *", 
+                min_value=0.0, 
                 value=float(test_data["ammo"]["coal_in"]),
                 step=0.001,
-                format="%.3f",
                 key="gen_coal"
-            )
-            
-            gen_b2o = st.number_input(
-                "B2O (inches) *",
-                min_value=0.0,
-                value=float(test_data["ammo"]["b2o_in"]),
-                step=0.001,
-                format="%.3f",
-                key="gen_b2o"
             )
             
             # Primer Brand dropdown - only from predefined list
@@ -557,7 +554,6 @@ def main():
             gen_powder_model and 
             gen_powder_charge > 0 and 
             gen_coal > 0 and 
-            gen_b2o > 0 and
             gen_primer_brand and 
             gen_primer_model
         )
@@ -588,7 +584,7 @@ def main():
                 gen_powder_model,
                 gen_powder_charge,
                 gen_coal,
-                gen_b2o,
+                test_data["ammo"]["b2o_in"],
                 gen_primer_brand,
                 gen_primer_model
             )
@@ -613,7 +609,6 @@ def main():
             test_data["ammo"]["powder"]["model"] = gen_powder_model
             test_data["ammo"]["powder"]["charge_gr"] = gen_powder_charge
             test_data["ammo"]["coal_in"] = gen_coal
-            test_data["ammo"]["b2o_in"] = gen_b2o
             test_data["ammo"]["primer"]["brand"] = gen_primer_brand
             test_data["ammo"]["primer"]["model"] = gen_primer_model
             
@@ -724,9 +719,6 @@ def main():
         with tab3:
             st.header("Ammunition Configuration")
             
-            # Add separator line
-            st.markdown("---")
-            
             # Case
             st.subheader("Case")
             col1, col2 = st.columns(2)
@@ -815,9 +807,6 @@ def main():
                     key="neck_turned"
                 )
             
-            # Add separator line
-            st.markdown("---")
-            
             # Bullet
             st.subheader("Bullet")
             col1, col2 = st.columns(2)
@@ -879,9 +868,6 @@ def main():
                     step=0.1
                 )
             
-            # Add separator line
-            st.markdown("---")
-            
             # Powder
             st.subheader("Powder")
             col1, col2 = st.columns(2)
@@ -942,9 +928,6 @@ def main():
                     key="powder_charge", 
                     step=0.1
                 )
-            
-            # Add separator line
-            st.markdown("---")
             
             # Primer
             st.subheader("Primer")
@@ -1011,16 +994,14 @@ def main():
                     "Cartridge Overall Length - COAL (inches)", 
                     min_value=0.0, 
                     value=float(test_data["ammo"]["coal_in"]),
-                    step=0.001,
-                    format="%.3f"
+                    step=0.001
                 )
             with col2:
                 test_data["ammo"]["b2o_in"] = st.number_input(
                     "Cartridge Base to Ogive - B2O (inches)",
                     min_value=0.0,
                     value=float(test_data["ammo"]["b2o_in"]),
-                    step=0.001,
-                    format="%.3f"
+                    step=0.001
                 )
         
         # Tab 4: Environment
@@ -1149,24 +1130,6 @@ def main():
                     value=float(test_data["chrono"]["es_fps"]),
                     step=0.1
                 )
-            
-            # Display Gordon GRT analysis image if available
-            if test_data["test_id"]:
-                st.header("Target Analysis")
-                test_folder = os.path.join("tests", test_data["test_id"])
-                
-                # Check if the folder exists
-                if os.path.exists(test_folder):
-                    # Look for PNG files in the folder
-                    png_files = [f for f in os.listdir(test_folder) if f.lower().endswith('.png')]
-                    
-                    if png_files:
-                        # Display the first PNG file found
-                        png_path = os.path.join(test_folder, png_files[0])
-                        # Display image at larger size
-                        st.image(png_path, caption="Gordon GRT Analysis", width=1024)
-                    else:
-                        st.info("No Gordon GRT analysis image available for this test.")
         
         # Tab 6: Notes and Files
         with tab6:
